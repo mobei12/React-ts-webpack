@@ -1,6 +1,6 @@
-### 技术栈 [React](https://react.docschina.org/)(18)+[TypeScript](https://www.typescriptlang.org/zh/)(4.9.5)+[cytoscape-react](https://github.com/plotly/react-cytoscapejs)(2.0)
+### 技术栈 [React](https://react.docschina.org/)(18)+[TypeScript](https://www.typescriptlang.org/zh/)(4.9.5)
 
-
+一个 基础的antd react  ts 模版，添加了reactRouter6,封装了axios请求
 ### `yarn start`
 
 ### `yarn build`
