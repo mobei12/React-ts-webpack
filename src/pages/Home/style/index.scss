@@ -1,0 +1,47 @@
+.condition-box {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin-bottom: 32px;
+	.ant-select {
+		width: 145px;
+		color: rgba(0, 0, 0, 0.65);
+	}
+	.ant-picker {
+		width: 224px
+	}
+	.ant-input {
+		width: 225px
+	}
+	.ant-picker {
+		width: 224px
+	}
+	.ant-input {
+		width: 225px
+	}
+	.search-handle-box{
+		text-align:right;
+		.search{
+			margin-right:16px;
+		}
+	}
+}
+.ant-pagination {
+	margin-top: 43px;
+	text-align: right;
+}
+.search-handle-box{
+	text-align:right;
+}
+@media screen and (max-width: 1440px) {
+	.condition-box{
+		.search-handle-box {
+			width:100%;
+		}
+	}
+}
+@media screen and (min-width: 1440px) {
+	.search-handle-box {
+		margin-top:0;
+	}
+}
