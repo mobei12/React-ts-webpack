@@ -1,7 +1,5 @@
-import { lazy, Suspense } from "react";
 import { Navigate } from "react-router-dom";
 import { ExtendedRouteObject } from "./type";
-import Loading from "../component/Loading";
 import User from "../pages/User";
 import Login from "../pages/User/Login";
 import Register from "../pages/User/Register";

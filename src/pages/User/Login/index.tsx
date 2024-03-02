@@ -1,43 +1,25 @@
 import { FC, ReactElement, useState } from "react";
 import { Button, Form, Input } from "antd";
-import { Link, NavigateFunction, useNavigate } from "react-router-dom";
-import api from "../../../api/index";
-import { cacheUserInfo, showMessage } from "../../../utils";
+import { Link,  NavigateFunction, useNavigate } from "react-router-dom";
+import {userHook} from '../../../hooks/index'
+import { showMessage } from "src/utils";
 
-type loginType = {
-	token?: string;
-	success: boolean;
-	message?: string;
-};
 const Login: FC = (): ReactElement => {
 	const navigate: NavigateFunction = useNavigate();
+	const { login } =userHook
 	const [loadings, setLoadings] = useState<boolean>(false);
-	const onFinish = (values: any): void => {
+	const onFinish = async (values :{name:string,password:string}) => {
 		setLoadings(true);
-		api.post<loginType>("/user/login", values)
-			.then(
-				(res): void => {
-					const {
-						data: { success, message = "登录成功" },
-					} = res;
-					if (success) {
-						const isActive = cacheUserInfo();
-						if (!isActive) {
-							showMessage("当前用户暂未启用,请联系管理员！", "warning", 3);
-							return;
-						}
-						showMessage(message, "success", 2, () => {
-							navigate("/home/overflowAnalysis");
-						});
-					} else {
-						showMessage(message, "error");
-					}
-				},
-				(err) => {
-					console.log(err);
-				},
-			)
-			.finally(() => setLoadings(false));
+		const { success, message,token } = await login(values);
+		if (success) {
+			localStorage.setItem("user_token", token!);
+			showMessage(message!, "success", 2, () => {
+				navigate("/home/overflowAnalysis");
+			});
+		}else {
+			showMessage(message!,"warning");
+		}
+		setLoadings(false);
 	};
 	return (
 		<Form
