@@ -2,6 +2,8 @@
   "exclude": ["node_modules","dist"],
   "includes": ["src"],
   "compilerOptions": {
+    "outDir": "./dist/",
+    "noImplicitAny": true,
     "target": "es5",
     "baseUrl": ".",
     "paths": {
@@ -23,7 +25,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react-jsx"
   },
   "include": [

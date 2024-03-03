@@ -1,4 +1,4 @@
-import { message } from "antd";
+import {message} from 'antd';
 
 export enum EMessageType {
 	success = "success",

@@ -5,8 +5,8 @@ import Login from "src/pages/User/Login";
 import Register from "src/pages/User/Register";
 /*---userEnd---*/
 import NotFind from "src/pages/404";
-import Home from "src/pages/Home";
-import PageTemplate from "src/pages/Home/PageTemplate";
+import Home from "src/pages/Layout";
+import PageTemplate from "src/pages/Layout/PageTemplate";
 /*---HomeEnd---*/
 
 const routesConfig: ExtendedRouteObject[] = [

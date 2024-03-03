@@ -1,8 +1,8 @@
 // index.ts
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import axios from "axios";
-import { removeToken, showMessage } from "../utils";
-import history from "../router/History";
+import { EMessageType, removeToken, showMessage } from "../utils";
+import history from "src/router/History";
 
 // 导出Request，可以用来自定义传递配置来创建实例
 export class Request {
@@ -29,7 +29,7 @@ export class Request {
 			},
 			(err: any): Promise<AxiosResponse> => {
 				// 请求错误，这里可以用全局提示框进行提示
-				showMessage("请求错误", "error");
+				showMessage("请求错误", EMessageType.error);
 				return Promise.reject(err);
 			},
 		);
@@ -103,18 +103,18 @@ export class Request {
 	}
 
 	/*private showLoading() {
-		if (this.isLoading === 0) {
-			// 显示加载中
-		}
-		this.isLoading++;
-	}
+	 if (this.isLoading === 0) {
+	 // 显示加载中
+	 }
+	 this.isLoading++;
+	 }
 
-	private hideLoading() {
-		this.isLoading--;
-		if (this.isLoading === 0) {
-			// 隐藏加载中
-		}
-	}*/
+	 private hideLoading() {
+	 this.isLoading--;
+	 if (this.isLoading === 0) {
+	 // 隐藏加载中
+	 }
+	 }*/
 
 	public get<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
 		return this.instance.get(url, config);
