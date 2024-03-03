@@ -1,7 +1,7 @@
 import { FC, Key, ReactElement, ReactNode } from "react";
 import { Layout, Menu, MenuProps } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ExtendedRouteObject } from "../../../router/type";
+import { ExtendedRouteObject } from "src/router/type";
 
 const { Sider } = Layout;
 
@@ -22,16 +22,17 @@ interface IProps {
 }
 
 const SideContainer: FC<IProps> = ({ pages }): ReactElement => {
-	const userRole = JSON.parse(localStorage.getItem("user") || "{}").role;
+	//const userRole = JSON.parse(localStorage.getItem("user") || "{}").role;
 	const items: MenuItem[] = [];
 	pages.forEach(({ title, path, role }) => {
-		if (role && role.includes(userRole)) {
+		/*if (role && role.includes(userRole)) {
 			items.push(getItem(title, path!));
-		}
+		}*/
+		items.push(getItem(title, path!));
 	});
 	const navigate = useNavigate();
 	const location = useLocation();
-	const defaultSelectedKeys = [location.pathname.split("/")[2]] || ["overflowAnalysis"];
+	const defaultSelectedKeys = [location.pathname.split("/")[2]] || ["PageTemplate"];
 	const menuIClick: MenuItemClick = (e) => {
 		const { key } = e;
 		if (key !== location.pathname.split("/")[2]) {

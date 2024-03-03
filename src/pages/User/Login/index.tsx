@@ -1,10 +1,10 @@
-import { FC, ReactElement, useState } from "react";
+import { FC,  useState } from "react";
 import { Button, Form, Input } from "antd";
 import { Link, NavigateFunction, useNavigate } from "react-router-dom";
 import { userHook } from "src/hooks/index";
 import { showMessage, EMessageType } from "src/utils";
 
-const Login: FC = (): ReactElement => {
+const Login: FC = () => {
 	const navigate: NavigateFunction = useNavigate();
 	const { login } = userHook;
 	const [loadings, setLoadings] = useState<boolean>(false);
@@ -16,8 +16,9 @@ const Login: FC = (): ReactElement => {
 		if (code === 200) {
 			if (token) {
 				localStorage.setItem("user_token", token);
+				localStorage.setItem("user", JSON.stringify({ name: values.username }));
 				showMessage("登录成功", EMessageType.success,2,()=>{
-					navigate("/home");
+					navigate("/home")
 				});
 
 			} else {

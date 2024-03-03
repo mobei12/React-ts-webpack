@@ -2,7 +2,7 @@ import { FC, memo, ReactElement } from "react";
 import { Dropdown, Layout, MenuProps, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { removeToken } from "../../../utils";
+import { removeToken } from "src/utils";
 
 const { Header } = Layout;
 
