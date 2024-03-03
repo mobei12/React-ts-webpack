@@ -1,4 +1,5 @@
 # Ignore artifacts:
 public
 build
+dist
 coverage
