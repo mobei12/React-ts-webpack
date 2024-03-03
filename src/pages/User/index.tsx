@@ -6,7 +6,7 @@ const User: FC = (): ReactElement => {
 	return (
 		<div className='user-main'>
 			<div className="user-container">
-				<div className="title">登录</div>
+				<div className="title">某某系统</div>
 				<Outlet/>
 			</div>
 		</div>

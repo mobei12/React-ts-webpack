@@ -1,25 +1,29 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, useState } from "react";
 import { Button, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../../api";
-import { showMessage } from "../../../utils";
+import { EMessageType, showMessage } from "src/utils";
+import { userHook } from "src/hooks/index";
 
 const Register: FC = (): ReactElement => {
 	const navigate = useNavigate();
-	const onFinish = (data: any) => {
-		api.post("/user/register", data).then(
-			() => {
-				showMessage("注册成功", "success", 2, () => {
-					navigate("/user/login", { replace: true });
-				});
-			},
-			(msg) => {
-				const {
-					data: { message },
-				} = msg;
-				showMessage(message, "error", 2);
-			},
-		);
+	const [loadings, setLoadings] = useState<boolean>(false);
+	const onFinish = async (values: any) => {
+		const { register } = userHook;
+		setLoadings(true);
+		const {
+			code, message, id,
+		} = await register(values);
+		if (code === 200) {
+			if (id) {
+				showMessage("注册成功", EMessageType.success);
+				navigate("/user/login");
+			} else {
+				showMessage(message!, EMessageType.warning);
+			}
+		} else {
+			showMessage(message!, EMessageType.warning);
+		}
+		setLoadings(false);
 	};
 	return (
 		<Form
@@ -30,7 +34,7 @@ const Register: FC = (): ReactElement => {
 			onFinish={onFinish}
 			autoComplete="off"
 		>
-			<Form.Item name="name" rules={[{ required: true, message: "请输入用户名!" }]}>
+			<Form.Item name="username" rules={[{ required: true, message: "请输入用户名!" }]}>
 				<Input placeholder="用户名" />
 			</Form.Item>
 
@@ -78,7 +82,7 @@ const Register: FC = (): ReactElement => {
 				<Input.Password placeholder="确认密码" />
 			</Form.Item>
 			<Form.Item wrapperCol={{ span: 24 }}>
-				<Button type="primary" htmlType="submit" block>
+				<Button type="primary" loading={loadings} htmlType="submit" block>
 					注册
 				</Button>
 			</Form.Item>

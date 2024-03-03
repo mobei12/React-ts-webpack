@@ -1,6 +1,6 @@
 import { message } from "antd";
 
-enum EMessageType {
+export enum EMessageType {
 	success = "success",
 	error = "error",
 	warning = "warning",

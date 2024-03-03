@@ -1,23 +1,30 @@
 import { FC, ReactElement, useState } from "react";
 import { Button, Form, Input } from "antd";
-import { Link,  NavigateFunction, useNavigate } from "react-router-dom";
-import {userHook} from '../../../hooks/index'
-import { showMessage } from "src/utils";
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
+import { userHook } from "src/hooks/index";
+import { showMessage, EMessageType } from "src/utils";
 
 const Login: FC = (): ReactElement => {
 	const navigate: NavigateFunction = useNavigate();
-	const { login } =userHook
+	const { login } = userHook;
 	const [loadings, setLoadings] = useState<boolean>(false);
-	const onFinish = async (values :{name:string,password:string}) => {
+	const onFinish = async (values: { username: string, password: string }) => {
 		setLoadings(true);
-		const { success, message,token } = await login(values);
-		if (success) {
-			localStorage.setItem("user_token", token!);
-			showMessage(message!, "success", 2, () => {
-				navigate("/home/overflowAnalysis");
-			});
-		}else {
-			showMessage(message!,"warning");
+		const {
+			code, message, token,
+		} = await login(values);
+		if (code === 200) {
+			if (token) {
+				localStorage.setItem("user_token", token);
+				showMessage("登录成功", EMessageType.success,2,()=>{
+					navigate("/home");
+				});
+
+			} else {
+				showMessage(message!, EMessageType.warning);
+			}
+		} else {
+			showMessage(message!, EMessageType.warning);
 		}
 		setLoadings(false);
 	};
@@ -30,7 +37,7 @@ const Login: FC = (): ReactElement => {
 			onFinish={onFinish}
 			autoComplete="off"
 		>
-			<Form.Item name="name" rules={[{ required: true, message: "请输入用户名!" }]}>
+			<Form.Item name="username" rules={[{ required: true, message: "请输入用户名!" }]}>
 				<Input placeholder="用户名" />
 			</Form.Item>
 			<Form.Item name="password" rules={[{ required: true, message: "请输入密码!" }]}>

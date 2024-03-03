@@ -8,10 +8,10 @@ import history from "../router/History";
 export class Request {
 	// axios 实例
 	instance: AxiosInstance;
-	isLoding: number = 0;
+	//isLoading: number = 0;
 	// 基础配置，url和超时时间
 	baseConfig: AxiosRequestConfig = {
-		baseURL: process.env.NODE_ENV === "production" ? `正式环境地址` : "/自定义code",
+		baseURL: process.env.NODE_ENV === "production" ? `正式环境地址` : "/api",
 		timeout: 10000,
 	};
 
@@ -102,19 +102,19 @@ export class Request {
 		);
 	}
 
-	private showLoading() {
-		if (this.isLoding === 0) {
+	/*private showLoading() {
+		if (this.isLoading === 0) {
 			// 显示加载中
 		}
-		this.isLoding++;
+		this.isLoading++;
 	}
 
 	private hideLoading() {
-		this.isLoding--;
-		if (this.isLoding === 0) {
+		this.isLoading--;
+		if (this.isLoading === 0) {
 			// 隐藏加载中
 		}
-	}
+	}*/
 
 	public get<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
 		return this.instance.get(url, config);

@@ -1,12 +1,12 @@
 {
+  "exclude": ["node_modules","dist"],
+  "includes": ["src"],
   "compilerOptions": {
     "target": "es5",
     "baseUrl": ".",
     "paths": {
       "src/*": ["src/*"],
     },
-    "exclude": ["node_modules","dist"],
-    "includes": ["src"],
     "lib": [
       "dom",
       "dom.iterable",
