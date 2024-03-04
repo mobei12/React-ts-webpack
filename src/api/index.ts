@@ -85,7 +85,7 @@ export class Request {
 		return this.instance.get(url, config);
 	}
 
-	public post<T = never>(url: string, data?: never, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+	public post<T = never, D = never>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
 		return this.instance.post(url, data, config);
 	}
 

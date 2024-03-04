@@ -1,5 +1,6 @@
 import { message } from 'antd';
 
+// eslint-disable-next-line no-shadow
 export enum EMessageType {
 	success = 'success',
 	error = 'error',

@@ -7,7 +7,7 @@ import { userHook } from 'src/hooks/index';
 const Register: FC = (): ReactElement => {
 	const navigate = useNavigate();
 	const [loadings, setLoadings] = useState<boolean>(false);
-	const onFinish = async (values: any) => {
+	const onFinish = async (values: { username: string; password: string }) => {
 		const { register } = userHook;
 		setLoadings(true);
 		const {
