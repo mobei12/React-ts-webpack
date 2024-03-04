@@ -1,27 +1,32 @@
-import { createElement, useLayoutEffect, useRef, useState } from "react";
+import {
+	createElement, useLayoutEffect, useRef, useState
+} from 'react';
 
-import { HashRouterProps, Router } from "react-router-dom";
-import hashHistory from "./History";
-import { HashHistory } from "history";
+import { HashRouterProps, Router } from 'react-router-dom';
+import { HashHistory } from 'history';
+import hashHistory from './History';
 
-export function HashRouter({ basename, children }: HashRouterProps): JSX.Element {
-	let historyRef = useRef<HashHistory>();
+function HashRouter({ basename, children }: HashRouterProps): JSX.Element {
+	const historyRef = useRef<HashHistory>();
 
 	if (historyRef.current == null) {
 		historyRef.current = hashHistory;
 	}
-	let history = historyRef.current;
-	let [state, setState] = useState({
+	const history = historyRef.current;
+	const [state, setState] = useState({
 		action: history!.action,
 		location: history!.location,
 	});
-	useLayoutEffect(() => history!.listen(setState), [history]);
+	useLayoutEffect(() =>
+history!.listen(setState), [history]);
 
-	return /*#__PURE__*/ createElement(Router, {
-		basename: basename,
-		children: children,
+	return /* #__PURE__ */ createElement(Router, {
+		basename,
+		children,
 		location: state.location,
 		navigationType: state.action,
 		navigator: history!,
 	});
 }
+
+export default HashRouter;

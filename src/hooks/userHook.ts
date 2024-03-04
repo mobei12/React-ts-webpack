@@ -1,4 +1,5 @@
-import api from "src/api";
+import api from 'src/api';
+
 type loginType = {
 	token?: string;
 	code: number;
@@ -10,9 +11,9 @@ type loginType = {
  * @return {loginType} 登录尝试的结果
  */
 async function login(values: { username: string, password: string }): Promise<loginType> {
-	let returnData: loginType = { code: 200,  message: "登录成功" };
+	let returnData: loginType = { code: 200, message: '登录成功' };
 	try {
-		const result = await api.post<loginType>("/user/login", values);
+		const result = await api.post<loginType>('/user/login', values);
 		const {
 			data,
 		} = result;
@@ -23,10 +24,10 @@ async function login(values: { username: string, password: string }): Promise<lo
 		return returnData;
 	}
 }
-async function register(values: { username: string, password: string }): Promise<any> {
-	let returnData= { code: 200,  message: "注册成功" };
+async function register(values: { username: string, password: string }) {
+	let returnData = { code: 200, message: '注册成功' };
 	try {
-		const result = await api.post("/user/register", values);
+		const result = await api.post('/user/register', values);
 		const {
 			data,
 		} = result;
@@ -37,4 +38,4 @@ async function register(values: { username: string, password: string }): Promise
 		return returnData;
 	}
 }
-export default { login,register };
+export default { login, register };

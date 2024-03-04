@@ -1,51 +1,51 @@
-import { Navigate } from "react-router-dom";
-import { ExtendedRouteObject } from "./type";
-import User from "src/pages/User";
-import Login from "src/pages/User/Login";
-import Register from "src/pages/User/Register";
-/*---userEnd---*/
-import NotFind from "src/pages/404";
-import Home from "src/pages/Layout";
-import PageTemplate from "src/pages/Layout/PageTemplate";
-/*---HomeEnd---*/
+import { Navigate } from 'react-router-dom';
+import User from 'src/pages/User';
+import Login from 'src/pages/User/Login';
+import Register from 'src/pages/User/Register';
+/* ---userEnd---*/
+import NotFind from 'src/pages/404';
+import Home from 'src/pages/Layout';
+import PageTemplate from 'src/pages/Layout/PageTemplate';
+import { ExtendedRouteObject } from './type';
+/* ---HomeEnd---*/
 
 const routesConfig: ExtendedRouteObject[] = [
 	{
-		path: "/home",
+		path: '/home',
 		auth: true,
 		element: <Home />,
 		children: [
 			{
-				path: "PageTemplate",
-				title: "页面模板",
+				path: 'PageTemplate',
+				title: '页面模板',
 				element: <PageTemplate/>,
 			},
 			{
-				path: "",
+				path: '',
 				element: <Navigate to="PageTemplate" replace />,
 			},
 		],
 	},
 	{
-		path: "/user",
+		path: '/user',
 		element: <User />,
 		children: [
 			{
-				path: "login",
+				path: 'login',
 				element: <Login />,
 			},
 			{
-				path: "register",
+				path: 'register',
 				element: <Register />,
 			},
 			{
-				path: "",
+				path: '',
 				element: <Navigate to="login" replace />,
 			},
 		],
 	},
 	{
-		path: "*",
+		path: '*',
 		element: <NotFind />,
 	},
 ];

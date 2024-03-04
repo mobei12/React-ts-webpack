@@ -1,10 +1,10 @@
-import {Button, Result} from 'antd';
-import React from 'react';
+import { Button, Result } from 'antd';
+import { FC } from 'react';
 
-const NoFoundPage: React.FC = () => {
+const NoFoundPage: FC = () => {
 	const goBack = (): void => {
 		window.history.back();
-	}
+	};
 	return (
 		<Result
 			status="404"
@@ -16,7 +16,7 @@ const NoFoundPage: React.FC = () => {
 				</Button>
 			}
 		/>
-	)
+	);
 };
 
 export default NoFoundPage;

@@ -1,5 +1,4 @@
-import userHook from "./userHook";
+import userHook from './userHook';
+import productHook from './productHook';
 
-export {
-	userHook,
-};
+export { userHook, productHook };

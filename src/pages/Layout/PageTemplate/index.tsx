@@ -1,6 +1,5 @@
-import { FC, } from "react";
+import { FC } from 'react';
 
-const PageTemplate: FC = (): JSX.Element => {
-	return <div>PageTemplate</div>;
-};
+const PageTemplate: FC = (): JSX.Element =>
+	<div>PageTemplate</div>;
 export default PageTemplate;
