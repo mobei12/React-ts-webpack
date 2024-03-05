@@ -1,6 +1,4 @@
-import {
-	createElement, useLayoutEffect, useRef, useState
-} from 'react';
+import { createElement, useLayoutEffect, useRef, useState } from 'react';
 
 import { HashRouterProps, Router } from 'react-router-dom';
 import { HashHistory } from 'history';
@@ -17,8 +15,7 @@ function HashRouter({ basename, children }: HashRouterProps): JSX.Element {
 		action: history!.action,
 		location: history!.location,
 	});
-	useLayoutEffect(() =>
-history!.listen(setState), [history]);
+	useLayoutEffect(() => { return history!.listen(setState) }, [history]);
 
 	return /* #__PURE__ */ createElement(Router, {
 		basename,

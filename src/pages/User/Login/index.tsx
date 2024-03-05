@@ -10,9 +10,7 @@ const Login: FC = () => {
 	const [loadings, setLoadings] = useState<boolean>(false);
 	const onFinish = async (values: { username: string, password: string }) => {
 		setLoadings(true);
-		const {
-			code, message, token,
-		} = await login(values);
+		const { code, message, token, } = await login(values);
 		if (code === 200) {
 			if (token) {
 				localStorage.setItem('user_token', token);

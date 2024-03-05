@@ -10,9 +10,7 @@ const Register: FC = (): ReactElement => {
 	const onFinish = async (values: { username: string; password: string }) => {
 		const { register } = userHook;
 		setLoadings(true);
-		const {
-			code, message, id,
-		} = await register(values);
+		const { code, message, id, } = await register(values);
 		if (code === 200) {
 			if (id) {
 				showMessage('注册成功', EMessageType.success);
@@ -69,15 +67,16 @@ const Register: FC = (): ReactElement => {
 						required: true,
 						message: '请再次输入密码',
 					},
-					({ getFieldValue }) =>
-						({
+					({ getFieldValue }) => {
+						return {
 							validator(_, value) {
 								if (!value || getFieldValue('password') === value) {
 									return Promise.resolve();
 								}
 								return Promise.reject(new Error('两次输入密码不一致!'));
 							},
-						}),
+						}
+					},
 				]}
 			>
 				<Input.Password placeholder="确认密码" />

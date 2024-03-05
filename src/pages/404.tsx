@@ -8,7 +8,7 @@ const NoFoundPage: FC = () => {
 	return (
 		<Result
 			status="404"
-			title="404啊"
+			title="404"
 			subTitle="没有找到您访问的页面"
 			extra={
 				<Button type="primary" onClick={goBack}>
