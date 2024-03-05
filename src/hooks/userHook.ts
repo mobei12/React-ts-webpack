@@ -16,15 +16,14 @@ type userType = {
  * @return {loginType} 登录尝试的结果
  */
 async function login(values: userType): Promise<loginType> {
-	let returnData: loginType = { code: 200, message: '登录成功' };
 	try {
-		const result = await api.post<loginType, userType>('/user/login', values);
-		const { data } = result;
-		returnData = { ...data };
-		return returnData;
+		const { data } = await api.post<loginType, userType>('/user/login', values);
+		return data;
 	} catch (error) {
-		returnData.message = error as string;
-		return returnData;
+		return {
+			code: 500,
+			message: error instanceof Error ? error.message : 'An unknown error occurred'
+		};
 	}
 }
 
@@ -33,15 +32,14 @@ type registerType = Omit<loginType, 'token'> & {
 };
 
 async function register(values: userType) {
-	let returnData: registerType = { code: 200, message: '注册成功' };
 	try {
-		const result = await api.post<loginType, userType>('/user/register', values);
-		const { data } = result;
-		returnData = { ...data };
-		return returnData;
+		const { data } = await api.post<registerType, userType>('/user/register', values);
+		return data;
 	} catch (error) {
-		returnData.message = error as string;
-		return returnData;
+		return {
+			code: 500,
+			message: error instanceof Error ? error.message : 'An unknown error occurred'
+		};
 	}
 }
 

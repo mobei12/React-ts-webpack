@@ -1,11 +1,7 @@
 // index.ts
-import axios, {
-	AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig, AxiosError
-} from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig, AxiosError } from 'axios';
 import history from 'src/router/History';
-import {
-	EMessageType, removeToken, showMessage, getMessage
-} from 'src/utils';
+import { EMessageType, removeToken, showMessage, getMessage } from 'src/utils';
 
 // 导出Request，可以用来自定义传递配置来创建实例
 export class Request {
@@ -55,13 +51,13 @@ export class Request {
 			(err: AxiosError): Promise<AxiosResponse> => {
 				// 这里用来处理http常见错误，进行全局提示
 				const status: number | null = err.response?.status || null;
-				const message: string = getMessage(status);
-				showMessage(message, 'error', 2, () => {
-					if (status === 401) {
+				const message: string = err.message || getMessage(status);
+				if (status === 401) {
+					showMessage(message, 'error', 2, () => {
 						removeToken();
 						history.push('/user/login');
-					}
-				});
+					});
+				}
 				return Promise.reject(err);
 			},
 		);

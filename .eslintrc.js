@@ -33,8 +33,10 @@ module.exports = {
 		'no-tabs': ['error', { allowIndentationTabs: true }],
 		indent: ['error', 'tab', { SwitchCase: 1 }], // 使用tab进
 		eqeqeq: ['error', 'smart'], // 必须使用 === 或 !==，禁止使用 == 或 !=，与 null 比较时除外
-		'arrow-parens': ['error', 'as-needed'], // 箭头函数参数的括号按需
+		'arrow-parens': ['error', 'always'], // 箭头函数参数的括号按需
 		quotes: ['error', 'single'],
+		'arrow-body-style': ['error', 'always'],
+		'object-curly-newline': ['error', { multiline: true }],
 		'implicit-arrow-linebreak': ['error', 'below'],
 		'max-len': [
 			'error',

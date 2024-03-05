@@ -5,7 +5,7 @@
 	"main": "app.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "webpack-dev-server --config ./build/webpack.dev.js  --hot --open",
+		"start": "webpack-dev-server --config ./build/webpack.dev.js --devtool eval-source-map  --hot --open ",
 		"build": "webpack --config ./build/webpack.prod.js",
 		"lint": "eslint \"src/**/*.{js,ts,tsx}\" --fix"
 	},
@@ -26,6 +26,7 @@
 		"clean-webpack-plugin": "^4.0.0",
 		"css-loader": "^6.10.0",
 		"css-minimizer-webpack-plugin": "^6.0.0",
+		"dotenv": "^16.4.5",
 		"eslint": "^8.57.0",
 		"eslint-config-airbnb-base": "^15.0.0",
 		"eslint-import-resolver-alias": "^1.1.2",

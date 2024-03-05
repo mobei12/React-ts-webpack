@@ -53,7 +53,7 @@ export function cacheUserInfo(): boolean | null {
 }
 
 export function getMessage(code: number | null): string {
-	let messageInfo :string;
+	let messageInfo: string;
 	switch (code) {
 		case 400:
 			messageInfo = '请求错误(400)';

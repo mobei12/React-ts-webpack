@@ -13,7 +13,7 @@ export default class Guard {
 
 	transformRoutes(routes = this.routes): ExtendedRouteObject[] {
 		const routesMap: ExtendedRouteObject[] = [];
-		routes.forEach(item => {
+		routes.forEach((item) => {
 			const temp: ExtendedRouteObject = { ...item };
 			if (this.role && temp.role && !temp.role.includes(this.role)) {
 				delete temp.role;
@@ -31,6 +31,12 @@ export default class Guard {
 		return routesMap;
 	}
 
+	/**
+	 * 在渲染元素之前检查身份验证的函数。
+	 *
+	 * @param {ReactElementType} element - 要检查身份验证的元素。
+	 * @return {ReactElementType} 基于身份验证状态要渲染的元素。
+	 */
 	static checkAuth(element: ReactElementType): ReactElementType {
 		const isAuthenticated = localStorage.getItem('user_token');
 		if (isAuthenticated) {

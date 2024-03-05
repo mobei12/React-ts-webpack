@@ -21,7 +21,7 @@ const Register: FC = (): ReactElement => {
 				showMessage(message!, EMessageType.warning);
 			}
 		} else {
-			showMessage(message!, EMessageType.warning);
+			showMessage(message!, EMessageType.error);
 		}
 		setLoadings(false);
 	};
