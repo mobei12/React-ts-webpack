@@ -2,13 +2,11 @@ const { merge } = require('webpack-merge');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 const baseConfig = require('./webpack.base.js');
-const dotenv = require('dotenv');
 const TerserPlugin = require('terser-webpack-plugin');
 //使用dll，必须在打包前先生成manifest webpack --config .\build\webpack.dll.conf.js
 const manifest = require('./dist/vendor.manifest.json');
-dotenv.config({ path: 'prod.env' });
 const { FileListPlugin } = require('../plugin.js');
-module.exports = merge(baseConfig, {
+const prodConfig = merge(baseConfig, {
 	mode: 'production',
 	/* cdn分离依赖包 */
 	/*externals: {
@@ -39,15 +37,11 @@ module.exports = merge(baseConfig, {
 			// manifest 就是之前打包出来的 json 文件
 			manifest,
 		}),
-		// 定义环境变量,在项目文件中使用
-		new webpack.DefinePlugin({
-			'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
-			'process.env.MODE': JSON.stringify('production'),
-		}),
 		new FileListPlugin(),
 		/* css压缩 */
 		new CssMinimizerPlugin({
 			test: /\.css$/,
 		}),
 	],
-});
+})
+module.exports = prodConfig;
