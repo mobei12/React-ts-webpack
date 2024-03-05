@@ -23,4 +23,7 @@
     +---utils               一些工具方法
 +---.prettierrc             格式化配置
 +---.eslintrc               代码检测配置
++---.gitignore              git忽略
++---tsconfig.json           ts配置
++---.env                    环境变量
 ````
