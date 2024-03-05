@@ -5,8 +5,9 @@
 	"main": "app.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "webpack-dev-server --config ./build/webpack.dev.js --devtool   --hot --open ",
+		"start": "webpack-dev-server --config ./build/webpack.dev.js    --hot --open ",
 		"build": "webpack --config ./build/webpack.prod.js",
+		"dll": "webpack --config ./build/webpack.dll.conf.js",
 		"lint": "eslint \"src/**/*.{js,ts,tsx}\" --fix"
 	},
 	"keywords": [
