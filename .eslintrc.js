@@ -34,10 +34,10 @@ module.exports = {
 		indent: ['error', 'tab', { SwitchCase: 1 }], // 使用tab进
 		eqeqeq: ['error', 'smart'], // 必须使用 === 或 !==，禁止使用 == 或 !=，与 null 比较时除外
 		'arrow-parens': ['error', 'always'], // 箭头函数参数的括号按需
-		quotes: ['error', 'single'],
-		'arrow-body-style': ['error', 'always'],
-		'object-curly-newline': ['error', { multiline: true }],
-		'implicit-arrow-linebreak': ['error', 'below'],
+		quotes: ['error', 'single'], // 单引号
+		'arrow-body-style': ['error', 'always'], // 箭头函数体使用大括号
+		'object-curly-newline': ['error', { multiline: true }], // 对象大括号换行
+		'implicit-arrow-linebreak': ['error', 'below'], // 隐式箭头函数的换行
 		'max-len': [
 			'error',
 			{
@@ -48,6 +48,7 @@ module.exports = {
 				ignoreRegExpLiterals: true,
 			},
 		],
+		// 导入文件后缀
 		'import/extensions': [
 			'error',
 			'ignorePackages',
@@ -58,6 +59,6 @@ module.exports = {
 				tsx: 'never',
 			},
 		],
-		'comma-dangle': 'off',
+		'comma-dangle': 'off', // 逗号结尾
 	},
 };

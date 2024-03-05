@@ -1,16 +1,21 @@
 const path = require('path');// 路径
-const webpack = require('webpack');// 路径
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');//  生成HTML文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');// css压缩
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');// 打包清理,删除dist目录
 const dotenv = require('dotenv');
+// 获取环境变量，projectRoot当前目录
 const projectRoot = process.cwd();
+const shared = {
+	include: path.resolve(projectRoot, 'src'),
+	exclude: /node_modules/,
+};
 // 解析env配置文件，设置环境变量
 try {
 	dotenv.config({ path: 'base.env' }); // 加载 .env 文件
-	if(process.env.NODE_ENV === 'development') {
+	if (process.env.NODE_ENV === 'development') {
 		dotenv.config({ path: 'dev.env' });
-	}else {
+	} else {
 		dotenv.config({ path: 'prod.env' });
 	}
 } catch (error) {
@@ -36,7 +41,6 @@ module.exports = {
 		rules: [
 			{
 				test: /\.tsx?$/,
-				include: path.resolve(projectRoot, 'src'),
 				use: [
 					{
 						loader: 'ts-loader',
@@ -45,35 +49,34 @@ module.exports = {
 						},
 					},
 				],
-				exclude: /node_modules/,
+				...shared,
 			},
 			{
 				test: /.js$/,
-				include: path.resolve(projectRoot, 'src'),
 				use: 'babel-loader',
-				exclude: /node_modules/,
+				...shared,
+				issuer: /\.[tj]sx?$/,
 			},
 			{
 				test: /\.s[ac]ss|css$/i,
-				include: path.resolve(projectRoot, 'src'),
-				exclude: /node_modules/,
+				...shared,
 				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+				issuer: /\.[tj]sx?$/,
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
-				include: path.resolve(projectRoot, 'src'),
-				exclude: /node_modules/,
+				...shared,
 				type: 'asset/resource',
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/,
 				type: 'asset/resource',
-				include: path.resolve(projectRoot, 'src'),
-				exclude: /node_modules/,
+				...shared,
 			},
 		],
 	},
 	plugins: [
+		/* 根据模板生成HTML文件，模板可不传 */
 		new HtmlWebpackPlugin({
 			template: `${projectRoot}/public/index.html`,
 		}),
@@ -90,13 +93,13 @@ module.exports = {
 		function errorPlugin() {
 			// 打包错误提示
 			this.hooks.done.tap('done', stats => {
-				/* istanbul ignore if  */
+				/* 打包错误  */
 				if (
 					stats.compilation.errors &&
 					stats.compilation.errors.length &&
 					process.argv.indexOf('--watch') === -1
 				) {
-					console.error(stats.compilation.errors); //eslint-disable-line
+					console.error(stats.compilation.errors); // 错误信息
 					process.exit(2);
 				}
 			});

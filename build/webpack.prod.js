@@ -14,8 +14,8 @@ const prodConfig = merge(baseConfig, {
 	 'react-dom': 'ReactDOM',
 	 },*/
 	optimization: {
-		minimizer: [new TerserPlugin({
-			minify: TerserPlugin.swcMinify,//需要添加yarn add --dev @swc/core
+		minimizer: [new TerserPlugin({//使用terser进行压缩
+			minify: TerserPlugin.swcMinify,
 			terserOptions: {},
 		})],
 		splitChunks: {
@@ -34,8 +34,7 @@ const prodConfig = merge(baseConfig, {
 		// 生成dll
 		new webpack.DllReferencePlugin({
 			context: __dirname,
-			// manifest 就是之前打包出来的 json 文件
-			manifest,
+			manifest,// manifest 就是之前打包出来的 json 文件
 		}),
 		new FileListPlugin(),
 		/* css压缩 */
