@@ -18,9 +18,7 @@ module.exports = {
 	settings: {
 		'import/extensions': ['.js', '.jsx', '.tsx', '.ts'],
 		'import/resolver': {
-			node: {
-				extensions: ['.js', '.jsx', '.tsx', '.ts'],
-			},
+			node: { extensions: ['.js', '.jsx', '.tsx', '.ts'] },
 			alias: {
 				map: [['src', './src']],
 				extensions: ['.js', '.jsx', '.tsx', '.ts'],
@@ -47,8 +45,7 @@ module.exports = {
 				ignoreTemplateLiterals: true,
 				ignoreRegExpLiterals: true,
 			},
-		],
-		// 导入文件后缀
+		], // 导入文件后缀
 		'import/extensions': [
 			'error',
 			'ignorePackages',
@@ -60,5 +57,6 @@ module.exports = {
 			},
 		],
 		'comma-dangle': 'off', // 逗号结尾
+		'linebreak-style': 'off',
 	},
 };
