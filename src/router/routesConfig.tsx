@@ -6,6 +6,7 @@ import Register from 'src/pages/User/Register';
 import NotFind from 'src/pages/404';
 import Home from 'src/pages/Layout';
 import PageTemplate from 'src/pages/Layout/PageTemplate';
+import ToDoList from 'src/pages/Layout/ToDoList';
 import { ExtendedRouteObject } from './type';
 /* ---HomeEnd---*/
 
@@ -18,7 +19,12 @@ const routesConfig: ExtendedRouteObject[] = [
 			{
 				path: 'PageTemplate',
 				title: '页面模板',
-				element: <PageTemplate/>,
+				element: <PageTemplate />,
+			},
+			{
+				path: 'ToDoList',
+				title: 'TodoList',
+				element: <ToDoList />,
 			},
 			{
 				path: '',

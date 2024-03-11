@@ -1,6 +1,6 @@
 const path = require('path');// 路径
 const webpack = require('webpack');
-const WebpackBar  = require('webpackbar');
+//const WebpackBar  = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');//  生成HTML文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');// css压缩
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');// 打包清理,删除dist目录
@@ -77,7 +77,7 @@ module.exports = {
 		],
 	},
 	plugins: [
-		new WebpackBar(),
+		//new WebpackBar(),
 		/* 根据模板生成HTML文件，模板可不传 */
 		new HtmlWebpackPlugin({
 			template: `${projectRoot}/public/index.html`,
