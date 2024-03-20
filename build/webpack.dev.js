@@ -3,11 +3,14 @@ const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.base');
 const { merge } = require('webpack-merge');
 const dotenv = require('dotenv');
-const devEnv = dotenv.config({ path: 'dev.env', override: true });
+const { generateEnv } = require('./common');
+
+
+const devEnv = dotenv.config({ path: ['dev.env', 'base.env'], override: true });
 const port = process.env.CUSTOMIZE_PORT || 8081; // 你的 devServer 端口号
 const defConfig = merge(config, {
 	mode: 'development',
-	//devtool: 'source-map',//开启sourceMap，方便调试
+	devtool: 'source-map',//开启sourceMap，方便调试
 	devServer: {
 		proxy: [
 			{
@@ -20,7 +23,7 @@ const defConfig = merge(config, {
 		port,
 	},
 	plugins: [
-		new webpack.DefinePlugin(devEnv?.parsed),
+		new webpack.DefinePlugin(generateEnv(devEnv.parsed)),
 	],
 });
 /*创建 webpack compiler*/

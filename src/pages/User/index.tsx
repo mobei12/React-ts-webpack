@@ -6,7 +6,7 @@ const User: FC = () => {
 	return (
 		<div className="user-main">
 			<div className="user-container">
-				<div className="title">APP_TITLE</div>
+				<div className="title">{process.env.CUSTOMIZE_APP_TITLE}</div>
 				<Outlet />
 			</div>
 		</div>

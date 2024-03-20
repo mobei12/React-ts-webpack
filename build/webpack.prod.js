@@ -3,6 +3,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const webpack = require('webpack');
 const baseConfig = require('./webpack.base.js');
 const TerserPlugin = require('terser-webpack-plugin');
+const { generateEnv } = require('./common');
 //使用dll，必须在打包前先生成manifest webpack --config .\build\webpack.dll.conf.js
 //const manifest = require('./dist/vendor.manifest.json');
 const dotenv = require('dotenv');
@@ -38,7 +39,7 @@ const prodConfig = merge(baseConfig, {
 			manifest,// manifest 就是之前打包出来的 json 文件
 		}), */
 		/* css压缩 */
-		new webpack.DefinePlugin(prodEnv?.parsed),
+		new webpack.DefinePlugin(generateEnv(prodEnv?.parsed)),
 		new CssMinimizerPlugin({
 			test: /\.css$/,
 		}),

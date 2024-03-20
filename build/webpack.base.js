@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');//  生成HTML文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');// css压缩
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');// 打包清理,删除dist目录
-const dotenv = require('dotenv');
 // 获取环境变量，projectRoot当前目录
 const projectRoot = process.cwd();
 const shared = {
@@ -11,7 +10,6 @@ const shared = {
 	exclude: /node_modules/,
 };
 // 解析env配置文件，设置环境变量
-const baseEnv = dotenv.config({ path: 'base.env' }); // 加载 .env 文件
 
 module.exports = {
 	entry: `${projectRoot}/src/index.tsx`,
@@ -77,8 +75,6 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].[contenthash:8].css',
 		}),
-		// 定义环境变量,在项目文件中使用
-		new webpack.DefinePlugin(baseEnv?.parsed),
 		new CleanWebpackPlugin(),
 		function errorPlugin() {
 			// 打包错误提示

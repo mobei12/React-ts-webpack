@@ -5,14 +5,16 @@
 	"main": "app.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "webpack-dev-server --config ./build/webpack.dev.js    --hot --open ",
+		"start": "node  ./build/webpack.dev.js ",
 		"build": "webpack --config ./build/webpack.prod.js",
 		"dll": "webpack --config ./build/webpack.dll.conf.js",
 		"lint": "eslint \"src/**/*.{js,ts,tsx}\" --fix"
 	},
 	"keywords": [
 		"TS",
-		"WebPack",
+		"WebPack5",
+		"React18",
+		"tailwindcss",
 		"ES6"
 	],
 	"author": "mobei",
@@ -22,6 +24,7 @@
 		"@babel/preset-env": "^7.24.0",
 		"@babel/preset-react": "^7.23.3",
 		"@swc/core": "^1.4.2",
+		"@types/node": "^20.11.30",
 		"@typescript-eslint/eslint-plugin": "^7.1.0",
 		"@typescript-eslint/parser": "^7.1.0",
 		"babel-loader": "^9.1.3",
@@ -36,6 +39,7 @@
 		"eslint-plugin-import": "^2.29.1",
 		"html-webpack-plugin": "^5.6.0",
 		"mini-css-extract-plugin": "^2.8.1",
+		"postcss-loader": "^8.1.1",
 		"prettier": "3.2.5",
 		"style-loader": "^3.3.4",
 		"terser-webpack-plugin": "^5.3.10",
@@ -59,13 +63,16 @@
 		"@types/react": "^18.2.61",
 		"@types/react-dom": "^18.2.19",
 		"antd": "^5.15.0",
+		"autoprefixer": "^10.4.18",
 		"axios": "^1.6.7",
 		"history": "^5.3.0",
+		"postcss": "^8.4.37",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router-dom": "^6.22.2",
 		"sass": "^1.71.1",
 		"sass-loader": "^14.1.1",
+		"tailwindcss": "3.4.1",
 		"ts-loader": "^9.5.1",
 		"typescript": "^5.3.3"
 	}

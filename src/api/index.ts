@@ -11,7 +11,7 @@ export class Request {
 	// isLoading: number = 0;
 	// 基础配置，url和超时时间
 	baseConfig: AxiosRequestConfig = {
-		baseURL: process.env.MODE === 'production' ? process.env.SERVER_URL : '/api',
+		baseURL: process.env.CUSTOMIZE_MODE === 'production' ? process.env.CUSTOMIZE_SERVER_URL : '/api',
 		timeout: 10000,
 	};
 
