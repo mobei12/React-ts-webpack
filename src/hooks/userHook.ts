@@ -1,5 +1,5 @@
 import api from 'src/api';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
 type loginType = {
 	token?: string;
@@ -21,20 +21,10 @@ async function login(values: userType): Promise<loginType> {
 		const { data } = await api.post<loginType, userType>('/user/login', values);
 		return data;
 	} catch (error) {
-		let code: string | number = 'unknown';
-		let message: string = 'An unknown error occurred';
-		if (axios.isAxiosError(error)) {
-			const axiosError = error as AxiosError;
-			code = axiosError.response?.status || 500; // 获取状态码，如果不存在则默认为 500
-			message = axiosError.message || 'An unknown error occurred'; // 获取错误消息
-			return {
-				code,
-				message,
-			};
-		}
+		const axiosError = error as AxiosError;
 		return {
-			code,
-			message,
+			code: axiosError.response?.status || 'unknown',
+			message: axiosError.message,
 		};
 	}
 }
@@ -43,29 +33,47 @@ type registerType = Omit<loginType, 'token'> & {
 	id?: number;
 };
 
-async function register(values: userType) {
+/**
+ * 使用提供的值注册用户。
+ *
+ * @param {userType} values - 要注册用户的数值
+ * @return {Promise<any>} 注册API调用返回的数据，或带有代码和消息的对象
+ */
+async function register(values: userType): Promise<registerType> {
 	try {
 		const { data } = await api.post<registerType, userType>('/user/register', values);
 		return data;
 	} catch (error) {
-		let code: number | string = 'unknown';
-		let message = 'An unknown error occurred';
-
-		// 根据具体错误类型设置不同的 code 和 message
-		if (axios.isAxiosError(error)) {
-			const axiosError = error as AxiosError;
-			code = axiosError.response?.status || 'unknown';
-			message = axiosError.message || message;
-		} else if (error instanceof Error) {
-			code = 'error';
-			message = error.message || message;
-		}
-
+		const axiosError = error as AxiosError;
 		return {
-			code,
-			message,
+			code: axiosError.response?.status || 'unknown',
+			message: axiosError.message,
 		};
 	}
 }
 
-export default { login, register };
+export interface IUser {
+	username: string;
+	_id: string;
+	ctime: Date;
+	level?: number;
+}
+
+type UserListType = IUser[];
+type RUserListType = Promise<{ code: number; data: UserListType; message: string }>;
+
+async function getUserList(): Promise<RUserListType> {
+	try {
+		const { data } = await api.get<UserListType>('/user/getUserList');
+		return { code: 200, data, message: 'success' };
+	} catch (error) {
+		const axiosError = error as AxiosError;
+		return {
+			code: axiosError.response?.status || 500,
+			data: [],
+			message: axiosError.message,
+		};
+	}
+}
+
+export default { login, register, getUserList };
