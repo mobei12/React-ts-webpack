@@ -6,7 +6,7 @@ const dotenv = require('dotenv');
 const { generateEnv } = require('./common');
 
 
-const devEnv = dotenv.config({ path: ['dev.env', 'base.env'], override: true });
+const devEnv = dotenv.config({ path: ['base.env','dev.env'], override: true });
 const port = process.env.CUSTOMIZE_PORT || 8081; // 你的 devServer 端口号
 const defConfig = merge(config, {
 	mode: 'development',

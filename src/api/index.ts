@@ -51,14 +51,14 @@ export class Request {
 			(err: AxiosError): Promise<AxiosResponse> => {
 				// 这里用来处理http常见错误，进行全局提示
 				const status: number | null = err.response?.status || null;
-				const message: string = err.message || getMessage(status);
+				const message: string = getMessage(status) || err.message;
 				if (status === 401) {
 					showMessage(message, 'error', 2, () => {
 						removeToken();
 						history.push('/user/login');
 					});
 				}
-				return Promise.reject(err);
+				return Promise.reject(Object.assign(err, { message }));
 			},
 		);
 	}

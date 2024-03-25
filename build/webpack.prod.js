@@ -7,7 +7,7 @@ const { generateEnv } = require('./common');
 //使用dll，必须在打包前先生成manifest webpack --config .\build\webpack.dll.conf.js
 //const manifest = require('./dist/vendor.manifest.json');
 const dotenv = require('dotenv');
-const prodEnv = dotenv.config({ path: 'dev.env', override: true });
+const prodEnv = dotenv.config({ path: ['prod.env','base.env'], override: true });
 const prodConfig = merge(baseConfig, {
 	mode: 'production',
 	/* cdn分离依赖包 */

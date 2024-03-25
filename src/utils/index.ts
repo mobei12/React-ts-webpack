@@ -26,9 +26,7 @@ export function removeToken(): void {
  */
 export function showMessage(
 	msg: string,
-	// eslint-disable-next-line default-param-last
 	type: TMessageType = EMessageType.success,
-	// eslint-disable-next-line default-param-last
 	duration: number = 3,
 	callback?: VoidFunction,
 ): void {

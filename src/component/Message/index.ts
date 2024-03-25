@@ -58,7 +58,7 @@ const addMessageElement = (
 
 const directiveRender: MessageComponent = ({ msg, type = EMessageType.success, duration, callback }) => {
 	// 创建消息容器
-	if (!container || container === null) {
+	if (!container) {
 		container = document.createElement('div');
 		container.setAttribute('class', 'message-container fixed top-0 text-center left-0 right-0');
 	}

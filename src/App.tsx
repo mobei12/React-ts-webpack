@@ -5,7 +5,7 @@ import routesConfig from './router/routesConfig';
 
 const App: FC = () => {
 	return (
-		<div className="App">
+		<div className="App bg-gray-700 h-full">
 			<Element routesConfig={routesConfig} />
 		</div>
 	)
