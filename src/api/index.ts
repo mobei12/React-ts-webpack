@@ -1,6 +1,5 @@
 // index.ts
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig, AxiosError } from 'axios';
-import history from 'src/router/History';
 import { EMessageType, removeToken, showMessage, getMessage } from 'src/utils';
 
 // 导出Request，可以用来自定义传递配置来创建实例
@@ -39,11 +38,10 @@ export class Request {
 			(res: AxiosResponse) => {
 				// 直接返回res，当然你也可以只返回res.data
 				// 系统如果有自定义code也可以在这里处理
+				// 判断是否授权
 				if (res.headers.authorization) {
-					// 判断是否授权
 					localStorage.setItem('user_token', res.headers.authorization);
 				} else if (res.data.token) {
-					// 判断是否授权
 					localStorage.setItem('user_token', res.data.token);
 				}
 				return res;
@@ -55,7 +53,7 @@ export class Request {
 				if (status === 401) {
 					showMessage(message, 'error', 2, () => {
 						removeToken();
-						history.push('/user/login');
+						// todo 切换到login
 					});
 				}
 				return Promise.reject(Object.assign(err, { message }));
