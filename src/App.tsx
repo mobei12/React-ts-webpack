@@ -1,9 +1,9 @@
-import { FC } from 'react';
 import { useRoutes } from 'react-router-dom';
 import './App.scss';
-import useGuard from './router/routesConfig';
+import routesWithGuard from 'src/router/routesConfig';
 
-const App: FC = () => {
-	return <div className="App bg-gray-700 h-full">{useRoutes(useGuard())}</div>;
+const App = () => {
+	const routes = routesWithGuard();
+	return <div className="App bg-gray-700 h-full">{useRoutes(routes)}</div>;
 };
 export default App;
