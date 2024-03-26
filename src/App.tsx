@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import './App.scss';
 import { useRoutes } from 'react-router-dom';
+import './App.scss';
 import useGuard from './router/routesConfig';
 
 const App: FC = () => {

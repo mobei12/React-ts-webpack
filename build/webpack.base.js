@@ -1,5 +1,4 @@
 const path = require('path');// 路径
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');//  生成HTML文件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');// css压缩
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');// 打包清理,删除dist目录
@@ -20,6 +19,7 @@ module.exports = {
 		filename: '[name].[chunkhash:8].js', // 打包后的文件名称
 		path: path.resolve(projectRoot, './dist'), // 打包后的目录
 		clean: true,
+		publicPath: '/',
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js'],

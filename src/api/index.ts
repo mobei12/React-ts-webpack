@@ -53,7 +53,7 @@ export class Request {
 				if (status === 401) {
 					showMessage(message, 'error', 2, () => {
 						removeToken();
-						window.location.href = window.location.href.replace(/#.*$/, '#/user/login'); // 执行页面导航操作
+						window.location.href = window.location.href.replace(/#.*$/, '/user/login'); // 执行页面导航操作
 					});
 				}
 				return Promise.reject(Object.assign(err, { message }));

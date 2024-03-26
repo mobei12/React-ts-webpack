@@ -20,6 +20,7 @@ const defConfig = merge(config, {
 				pathRewrite: { '^/api': '/api' },//根据自己后台配置
 			},
 		],
+		historyApiFallback: true,// history 模式
 		port,
 	},
 	plugins: [
@@ -36,7 +37,7 @@ server.start().then(() => {
 	console.log(`dev server listening on port ${port}`);
 	// 打开指定路由
 	const { exec } = require('child_process');
-	exec(`start http://localhost:${port}/#/home`); // 在 Windows 上打开 URL
+	exec(`start http://localhost:${port}/home`); // 在 Windows 上打开 URL
 }).catch((err) => {
 	console.error(err);
 });
