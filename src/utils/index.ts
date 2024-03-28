@@ -45,7 +45,7 @@ export function cacheUserInfo(): boolean | null {
 	const token = localStorage.getItem('user_token');
 	if (token) {
 		localStorage.setItem('user', token);
-		return null;
+		return true;
 	}
 	return null;
 }

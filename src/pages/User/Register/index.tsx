@@ -82,7 +82,7 @@ const Register: FC = (): ReactElement => {
 				<Input.Password placeholder="确认密码" />
 			</Form.Item>
 			<Form.Item wrapperCol={{ span: 24 }}>
-				<Button type="primary" loading={loadings} htmlType="submit" block>
+				<Button type="primary" className='bg-blue-500' loading={loadings} htmlType="submit" block>
 					注册
 				</Button>
 			</Form.Item>

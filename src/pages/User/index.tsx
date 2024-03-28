@@ -4,8 +4,8 @@ import './index.scss';
 
 const User: FC = () => {
 	return (
-		<div className="user-main bg-gray-700">
-			<div className="user-container">
+		<div className="user-main ">
+			<div className="user-container bg-white ">
 				<div className="title">{process.env.CUSTOMIZE_APP_TITLE}</div>
 				<Outlet />
 			</div>

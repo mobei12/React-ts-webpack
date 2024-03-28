@@ -42,12 +42,12 @@ const Login: FC = () => {
 				<Input.Password placeholder="密码" />
 			</Form.Item>
 			<Form.Item wrapperCol={{ span: 24 }}>
-				<Button type="primary" loading={loadings} htmlType="submit" block>
+				<Button type="primary" className='bg-blue-500' loading={loadings} htmlType="submit" block>
 					登录
 				</Button>
 			</Form.Item>
 			<Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
-				<Link to="/user/Register">注册</Link>
+				<Link to="/user/register">注册</Link>
 			</Form.Item>
 		</Form>
 	);

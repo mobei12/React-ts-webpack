@@ -4,6 +4,6 @@ import routesWithGuard from 'src/router/routesConfig';
 
 const App = () => {
 	const routes = routesWithGuard();
-	return <div className="App bg-gray-700 h-full">{useRoutes(routes)}</div>;
+	return <div className="App bg-gray-500  h-full">{useRoutes(routes)}</div>;
 };
 export default App;
