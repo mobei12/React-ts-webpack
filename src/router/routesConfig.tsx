@@ -3,17 +3,18 @@ import { Navigate } from 'react-router-dom';
 
 import User from 'src/pages/User';
 import Login from 'src/pages/User/Login';
+import Register from 'src/pages/User/Register';
 
 import NotFind from 'src/pages/404';
 import Home from 'src/pages/Layout';
 import PageTemplate from 'src/pages/Layout/PageTemplate';
+import { cacheUserInfo } from 'src/utils';
 import { ExtendedRouteObject } from './type';
 
-const Register = lazy(() => import('src/pages/User/Register'));
 const ToDoList = lazy(() => import('src/pages/Layout/ToDoList'));
 /* ---HomeEnd---*/
 export default function routesWithGuard(): ExtendedRouteObject[] {
-	const isLogin = !!localStorage.getItem('user_token');
+	const isLogin = !!cacheUserInfo();
 	return [
 		{
 			path: '/home',
