@@ -13,7 +13,14 @@ type TodoContextProps = {
 };
 // 创建容器，并实现
 export const ToDoContext = createContext<TodoContextProps | undefined>(undefined);
-const TodoProvider = (props: { children: React.ReactNode }) => {
+/**
+ * 创建一个主题提供者组件，将其包裹的子组件包裹在一个主题上下文中。
+ *
+ * @param {Object} props - 组件的属性。
+ * @param {React.ReactNode} props.children - 需要被包裹在主题提供者中的子组件。
+ * @return {JSX.Element} 主题提供者组件。
+ */
+const TodoProvider = (props: { children: React.ReactNode }): JSX.Element => {
 	const [toDos, setToDos] = useState<Todo[]>([]);
 	const addToDo = (text: string) => {
 		const todo: Todo = {

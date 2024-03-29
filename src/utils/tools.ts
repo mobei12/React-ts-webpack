@@ -19,7 +19,8 @@ const cacheUserInfo = (): boolean | null => {
  * @description 清除所有token
  */
 const removeToken = (): void => {
-	localStorage.clear();
+	localStorage.removeItem('user');
+	localStorage.removeItem('user_token');
 };
 
 /**
@@ -72,9 +73,9 @@ const getInfoWithCode = (code: number | null): string => {
 	}
 	return messageInfo;
 };
-export type TTheme = 'dark' | 'light' | 'auto' | undefined;
+export type TTheme = 'dark' | 'light' | 'system' | undefined;
 
-const setTheme = (isDark?: TTheme): void => {
+const setTheme = (isDark?: TTheme): string | null => {
 	const rootElement: HTMLElement = document.documentElement as HTMLElement;
 	const localTheme = localStorage.getItem('theme');
 
@@ -83,7 +84,7 @@ const setTheme = (isDark?: TTheme): void => {
 		if (localTheme) {
 			if (localTheme === 'dark') {
 				rootElement.classList.add('dark');
-			} else if (localTheme === 'auto') {
+			} else if (localTheme === 'system') {
 				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 					rootElement.classList.add('dark');
 				}
@@ -93,7 +94,7 @@ const setTheme = (isDark?: TTheme): void => {
 		}
 	} else {
 		// 用户主动选择主题时，根据用户的选择来设置主题模式，并将选择保存到 localStorage 中
-		if (isDark === 'auto') {
+		if (isDark === 'system') {
 			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
 				rootElement.classList.add('dark');
 			} else {
@@ -104,6 +105,7 @@ const setTheme = (isDark?: TTheme): void => {
 		}
 		localStorage.setItem('theme', isDark);
 	}
+	return localStorage.getItem('theme');
 };
 
 // 调用示例

@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import User from 'src/pages/User';
@@ -8,10 +8,12 @@ import Register from 'src/pages/User/Register';
 import NotFind from 'src/pages/404';
 import Home from 'src/pages/Layout';
 import PageTemplate from 'src/pages/Layout/PageTemplate';
+import ToDoList from 'src/pages/Layout/ToDoList';
 import { Tools } from 'src/utils';
+import Welcome from 'src/pages/Layout/Welcome';
+import AuthorityManagement from 'src/pages/Layout/UserManagement/AuthorityManagement';
 import { ExtendedRouteObject } from './type';
 
-const ToDoList = lazy(() => import('src/pages/Layout/ToDoList'));
 /* ---HomeEnd---*/
 export default function routesWithGuard(): ExtendedRouteObject[] {
 	const isLogin = !!Tools.cacheUserInfo();
@@ -22,17 +24,28 @@ export default function routesWithGuard(): ExtendedRouteObject[] {
 			children: [
 				{
 					path: 'PageTemplate',
-					title: '页面模板',
 					element: <PageTemplate />,
 				},
 				{
 					path: 'ToDoList',
-					title: 'TodoList',
 					element: <ToDoList />,
 				},
 				{
+					path: 'Welcome',
+					element: <Welcome />,
+				},
+				{
+					path: 'UserManagement',
+					children: [
+						{
+							path: 'AuthorityManagement',
+							element: <AuthorityManagement />,
+						},
+					],
+				},
+				{
 					path: '',
-					element: <Navigate to="PageTemplate" replace />,
+					element: <Navigate to="Welcome" replace />,
 				},
 			],
 		},
