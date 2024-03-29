@@ -72,30 +72,45 @@ const getInfoWithCode = (code: number | null): string => {
 	}
 	return messageInfo;
 };
-type TTheme = 'dark' | 'light' | 'auto' | undefined;
-const setTheme = (isDark: TTheme): void => {
-	if (isDark === 'auto') {
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			localStorage.setItem('theme', 'auto');
-			document.documentElement.classList.add('dark');
-		} else {
-			localStorage.removeItem('theme');
-			document.documentElement.classList.remove('dark');
+export type TTheme = 'dark' | 'light' | 'auto' | undefined;
+
+const setTheme = (isDark?: TTheme): void => {
+	const rootElement: HTMLElement = document.documentElement as HTMLElement;
+	const localTheme = localStorage.getItem('theme');
+
+	// 页面刷新时，根据 localStorage 中存储的主题设置来确定主题模式
+	if (isDark === undefined) {
+		if (localTheme) {
+			if (localTheme === 'dark') {
+				rootElement.classList.add('dark');
+			} else if (localTheme === 'auto') {
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					rootElement.classList.add('dark');
+				}
+			}
+		} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			rootElement.classList.add('dark');
 		}
-	} else if (isDark === 'light') {
-		localStorage.setItem('theme', 'light');
-		document.documentElement.classList.remove('dark');
-	} else if (isDark === 'dark') {
-		localStorage.setItem('theme', 'dark');
-		document.documentElement.classList.add('dark');
 	} else {
-		localStorage.removeItem('theme');
-		document.documentElement.classList.remove('dark');
+		// 用户主动选择主题时，根据用户的选择来设置主题模式，并将选择保存到 localStorage 中
+		if (isDark === 'auto') {
+			if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				rootElement.classList.add('dark');
+			} else {
+				rootElement.classList.remove('dark');
+			}
+		} else {
+			rootElement.classList.toggle('dark', isDark === 'dark');
+		}
+		localStorage.setItem('theme', isDark);
 	}
 };
+
+// 调用示例
 export default {
 	cacheUserInfo,
 	removeToken,
 	getInfoWithCode,
 	setTheme,
+	TTheme: 'auto' as TTheme,
 };
