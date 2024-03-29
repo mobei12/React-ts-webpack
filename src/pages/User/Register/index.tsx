@@ -3,11 +3,12 @@ import { Button, Form, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { Interaction } from 'src/utils';
 import { userHook } from 'src/hooks/index';
+import loadsh from 'lodash';
 
 const Register: FC = (): ReactElement => {
 	const navigate = useNavigate();
 	const [loadings, setLoadings] = useState<boolean>(false);
-	const onFinish = async (values: { username: string; password: string }) => {
+	const getRegister = async (values: { username: string; password: string }) => {
 		const { register } = userHook;
 		setLoadings(true);
 		const { code, message, id } = await register(values);
@@ -17,14 +18,17 @@ const Register: FC = (): ReactElement => {
 				navigate('/user/login');
 			} else {
 				Interaction.showMessage(message!, Interaction.EMessageType.warning);
+				setLoadings(false);
 			}
 		} else {
 			Interaction.showMessage(message!, Interaction.EMessageType.error);
+			setLoadings(false);
 		}
-		setLoadings(false);
 	};
+	const onFinish = loadsh.debounce(getRegister, 1000);
 	return (
 		<Form
+			className=''
 			name="basic"
 			wrapperCol={{ span: 24 }}
 			style={{ maxWidth: 600, minHeight: '300px' }}
@@ -87,7 +91,7 @@ const Register: FC = (): ReactElement => {
 				</Button>
 			</Form.Item>
 			<Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
-				<Link to="/user/login">登录</Link>
+				<Link className='dark:text-white' to="/user/login">登录</Link>
 			</Form.Item>
 		</Form>
 	);

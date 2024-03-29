@@ -72,9 +72,30 @@ const getInfoWithCode = (code: number | null): string => {
 	}
 	return messageInfo;
 };
-
+type TTheme = 'dark' | 'light' | 'auto' | undefined;
+const setTheme = (isDark: TTheme): void => {
+	if (isDark === 'auto') {
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			localStorage.setItem('theme', 'auto');
+			document.documentElement.classList.add('dark');
+		} else {
+			localStorage.removeItem('theme');
+			document.documentElement.classList.remove('dark');
+		}
+	} else if (isDark === 'light') {
+		localStorage.setItem('theme', 'light');
+		document.documentElement.classList.remove('dark');
+	} else if (isDark === 'dark') {
+		localStorage.setItem('theme', 'dark');
+		document.documentElement.classList.add('dark');
+	} else {
+		localStorage.removeItem('theme');
+		document.documentElement.classList.remove('dark');
+	}
+};
 export default {
 	cacheUserInfo,
 	removeToken,
 	getInfoWithCode,
+	setTheme,
 };

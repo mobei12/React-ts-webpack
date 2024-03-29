@@ -50,7 +50,7 @@ const Login: FC = () => {
 				</Button>
 			</Form.Item>
 			<Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
-				<Link to="/user/register">注册</Link>
+				<Link className='dark:text-white' to="/user/register">注册</Link>
 			</Form.Item>
 		</Form>
 	);
