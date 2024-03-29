@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { EMessageType, showMessage } from 'src/utils';
+import { Interaction } from 'src/utils';
 import { useTodo } from 'src/context/Todo';
 import Input from './Input';
 
@@ -14,9 +14,9 @@ const ToDoList = () => {
 		if (inputRef.current && inputRef.current.value.trim().length > 0) {
 			addToDo(inputRef.current.value);
 			inputRef.current.value = '';
-			showMessage('添加成功，继续');
+			Interaction.showMessage('添加成功，继续');
 		} else {
-			showMessage('添加失败请重试', EMessageType.warning);
+			Interaction.showMessage('添加失败请重试', Interaction.EMessageType.warning);
 		}
 	};
 	return (

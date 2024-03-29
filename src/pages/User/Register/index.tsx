@@ -1,7 +1,7 @@
 import { FC, ReactElement, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
-import { EMessageType, showMessage } from 'src/utils';
+import { Interaction } from 'src/utils';
 import { userHook } from 'src/hooks/index';
 
 const Register: FC = (): ReactElement => {
@@ -10,16 +10,16 @@ const Register: FC = (): ReactElement => {
 	const onFinish = async (values: { username: string; password: string }) => {
 		const { register } = userHook;
 		setLoadings(true);
-		const { code, message, id, } = await register(values);
+		const { code, message, id } = await register(values);
 		if (code === 200) {
 			if (id) {
-				showMessage('注册成功', EMessageType.success);
+				Interaction.showMessage('注册成功', Interaction.EMessageType.success);
 				navigate('/user/login');
 			} else {
-				showMessage(message!, EMessageType.warning);
+				Interaction.showMessage(message!, Interaction.EMessageType.warning);
 			}
 		} else {
-			showMessage(message!, EMessageType.error);
+			Interaction.showMessage(message!, Interaction.EMessageType.error);
 		}
 		setLoadings(false);
 	};
@@ -75,14 +75,14 @@ const Register: FC = (): ReactElement => {
 								}
 								return Promise.reject(new Error('两次输入密码不一致!'));
 							},
-						}
+						};
 					},
 				]}
 			>
 				<Input.Password placeholder="确认密码" />
 			</Form.Item>
 			<Form.Item wrapperCol={{ span: 24 }}>
-				<Button type="primary" className='bg-blue-500' loading={loadings} htmlType="submit" block>
+				<Button type="primary" className="bg-blue-500" loading={loadings} htmlType="submit" block>
 					注册
 				</Button>
 			</Form.Item>

@@ -33,3 +33,16 @@
 +---dev.env                 开发环境变量
 +---prod.env                生产环境变量
 ````
+### 使用的工具和库
+
+````text
++--- axios
++--- antd
++--- react-router
++--- react-router-dom
++--- typescript
++--- webpack
++--- lodash
++--- tailwindcss
++--- prettier
+```

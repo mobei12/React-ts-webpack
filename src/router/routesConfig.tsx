@@ -8,13 +8,13 @@ import Register from 'src/pages/User/Register';
 import NotFind from 'src/pages/404';
 import Home from 'src/pages/Layout';
 import PageTemplate from 'src/pages/Layout/PageTemplate';
-import { cacheUserInfo } from 'src/utils';
+import { Tools } from 'src/utils';
 import { ExtendedRouteObject } from './type';
 
 const ToDoList = lazy(() => import('src/pages/Layout/ToDoList'));
 /* ---HomeEnd---*/
 export default function routesWithGuard(): ExtendedRouteObject[] {
-	const isLogin = !!cacheUserInfo();
+	const isLogin = !!Tools.cacheUserInfo();
 	return [
 		{
 			path: '/home',

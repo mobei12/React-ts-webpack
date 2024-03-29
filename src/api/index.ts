@@ -1,6 +1,6 @@
 // index.ts
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig, AxiosError } from 'axios';
-import { EMessageType, removeToken, showMessage, getMessage } from 'src/utils';
+import { Tools, Interaction } from 'src/utils';
 import GlobalLoading from 'src/component/Loading';
 
 // 导出Request，可以用来自定义传递配置来创建实例
@@ -34,7 +34,7 @@ export class Request {
 			(err: AxiosError): Promise<AxiosResponse> => {
 				// 请求错误，这里可以用全局提示框进行提示
 				this.showLoading(); // 请求发起前显示加载状态
-				showMessage('请求错误', EMessageType.error);
+				Interaction.showMessage('请求错误', Interaction.EMessageType.error);
 				return Promise.reject(err);
 			},
 		);
@@ -55,10 +55,10 @@ export class Request {
 				this.hideLoading(); // 请求错误时隐藏加载状态
 				// 这里用来处理http常见错误，进行全局提示
 				const status: number | null = err.response?.status || null;
-				const message: string = getMessage(status) || err.message;
+				const message: string = Tools.getInfoWithCode(status) || err.message;
 				if (status === 401) {
-					showMessage(message, 'error', 2, () => {
-						removeToken();
+					Interaction.showMessage(message, 'error', 2, () => {
+						Tools.removeToken();
 						const dynamicPartRegex = /\/\/[^/]+\/(.*)/; // 匹配第一个斜杠后的所有部分
 						const dynamicPartMatch = window.location.href.match(dynamicPartRegex);
 						if (dynamicPartMatch && dynamicPartMatch[1]) {

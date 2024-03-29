@@ -1,31 +1,34 @@
 import { FC, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
+import loadsh from 'lodash';
 import { userHook } from 'src/hooks/index';
-import { showMessage, EMessageType } from 'src/utils';
+import { Interaction } from 'src/utils';
 
 const Login: FC = () => {
 	const navigate: NavigateFunction = useNavigate();
 	const { login } = userHook;
 	const [loadings, setLoadings] = useState<boolean>(false);
-	const onFinish = async (values: { username: string, password: string }) => {
+	const getLogin = async (values: { username: string; password: string }) => {
 		setLoadings(true);
-		const { code, message, token, } = await login(values);
+		const { code, message, token } = await login(values);
 		if (code === 200) {
 			if (token) {
 				localStorage.setItem('user_token', token);
 				localStorage.setItem('user', JSON.stringify({ name: values.username }));
-				showMessage('登录成功', EMessageType.success, 2, () => {
+				Interaction.showMessage('登录成功', Interaction.EMessageType.success, 2, () => {
 					navigate('/home');
 				});
 			} else {
-				showMessage(message!, EMessageType.warning);
+				Interaction.showMessage(message!, Interaction.EMessageType.warning);
+				setLoadings(false);
 			}
 		} else {
-			showMessage(message!, EMessageType.error);
+			Interaction.showMessage(message!, Interaction.EMessageType.error);
+			setLoadings(false);
 		}
-		setLoadings(false);
 	};
+	const onFinish = loadsh.debounce(getLogin, 1000);
 	return (
 		<Form
 			name="basic"
@@ -42,7 +45,7 @@ const Login: FC = () => {
 				<Input.Password placeholder="密码" />
 			</Form.Item>
 			<Form.Item wrapperCol={{ span: 24 }}>
-				<Button type="primary" className='bg-blue-500' loading={loadings} htmlType="submit" block>
+				<Button type="primary" className="bg-blue-500" loading={loadings} htmlType="submit" block>
 					登录
 				</Button>
 			</Form.Item>

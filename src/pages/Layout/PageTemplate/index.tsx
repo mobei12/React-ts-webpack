@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import './index.scss';
 import { userHook } from 'src/hooks';
-import { EMessageType, showMessage } from 'src/utils';
+import { Interaction } from 'src/utils';
 import { IUser } from 'src/hooks/userHook';
 
 const PageTemplate: FC = () => {
@@ -13,7 +13,7 @@ const PageTemplate: FC = () => {
 			if (code === 200) {
 				setDataList(data);
 			} else {
-				showMessage(message, EMessageType.warning);
+				Interaction.showMessage(message, Interaction.EMessageType.warning);
 			}
 		};
 		fetchData();
