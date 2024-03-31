@@ -1,79 +1,45 @@
-import { NavigateFunction, Outlet, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Layout, Menu, theme, Button } from 'antd';
+import { Outlet } from 'react-router-dom';
 import ToggleTheme from 'src/component/ToggleThem';
+import { menusHooks } from 'src/hooks';
 import { Tools } from 'src/utils';
 
-import React from 'react';
-import { UserOutlined, DiffOutlined, CheckSquareOutlined } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
-import { Layout, Menu, theme, Button } from 'antd';
-
 const { Header, Content, Sider } = Layout;
-
-const items1: MenuProps['items'] = ['1', '2', '3'].map((key) => ({
-	key,
-	label: `nav ${key}`,
-}));
-const siderMenu: MenuProps['items'] = [
-	{
-		key: 'subUser',
-		icon: React.createElement(UserOutlined),
-		label: '用户管理',
-		children: [
-			{
-				key: 'UserManagement/AuthorityManagement',
-				label: '权限管理',
-			},
-		],
-	},
-	{
-		key: 'PageTemplate',
-		icon: React.createElement(DiffOutlined),
-		label: 'PageTemplate',
-	},
-	{
-		key: 'ToDoList',
-		icon: React.createElement(CheckSquareOutlined),
-		label: 'ToDoList',
-	},
-];
-
 const App: React.FC = () => {
-	const navigate: NavigateFunction = useNavigate();
-	const {
-		token: { colorBgContainer, borderRadiusLG },
-	} = theme.useToken();
+	const { token } = theme.useToken();
+	const { getMenus } = menusHooks;
+	const [menus, defaultKey, navigateTo] = getMenus();
+	const { colorBgContainer, borderRadiusLG } = token;
 	const loginOut = () => {
 		Tools.removeToken();
-		navigate('/user/login');
-	};
-	const menuClick = (key: string) => {
-		navigate(key);
+		navigateTo('/user/login');
 	};
 	return (
 		<Layout className="h-full">
-			<Header style={{ display: 'flex', alignItems: 'center' }}>
-				<div className="demo-logo" />
-				<Menu
-					theme="dark"
-					mode="horizontal"
-					defaultSelectedKeys={['2']}
-					items={items1}
-					style={{ flex: 1, minWidth: 0 }}
-				/>
-				<Button type="primary" className="bg-blue-500" onClick={() => loginOut()}>
-					退出
-				</Button>
-				<ToggleTheme />
+			<Header
+				style={{
+					display: 'flex',
+					background: colorBgContainer,
+					alignItems: 'center',
+				}}
+			>
+				<div className="demo-logo dark:text-gray-300 font-bold text-4xl">LOGO</div>
+				{/* <Menu mode="horizontal" defaultSelectedKeys={['2']} items={items1} style={{ flex: 1, minWidth: 0 }}
+				 /> */}
+				<div className="right flex-1 text-right">
+					<Button onClick={() => loginOut()}>退出</Button>
+					<ToggleTheme />
+				</div>
 			</Header>
 			<Layout>
 				<Sider width={200} style={{ background: colorBgContainer }}>
 					<Menu
 						mode="inline"
-						defaultSelectedKeys={['1']}
-						defaultOpenKeys={['sub1']}
-						onClick={({ key }) => menuClick(key)}
+						selectedKeys={[defaultKey]}
+						onClick={({ key }) => navigateTo(key)}
 						style={{ height: '100%', borderRight: 0 }}
-						items={siderMenu}
+						items={menus}
 					/>
 				</Sider>
 				<Layout style={{ padding: '0 24px 24px' }}>

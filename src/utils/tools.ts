@@ -1,7 +1,6 @@
 /*
  函数类工具，如：判断登录权限，获取token等
  */
-
 /**
  * @description 根据token 解析用户信息并保存
  * @return {boolean | null} 是否有登录权限
@@ -21,6 +20,7 @@ const cacheUserInfo = (): boolean | null => {
 const removeToken = (): void => {
 	localStorage.removeItem('user');
 	localStorage.removeItem('user_token');
+	localStorage.removeItem('menus');
 };
 
 /**
