@@ -7,7 +7,7 @@ import { ETheme, useTheme } from 'src/context/Theme';
 import { setTheme } from 'src/utils';
 import './App.scss';
 
-const Temp = () => {
+const RouterTag = () => {
 	const routes = routesWithGuard(routConfig);
 	return <div className="App dark:bg-gray-500 dark:text-white bg-gray-300  h-full">{useRoutes(routes)}</div>;
 };
@@ -23,7 +23,7 @@ const App = () => {
 		<ConfigProvider
 			theme={{ algorithm: currentTheme === ETheme.LIGHT ? theme.defaultAlgorithm : theme.darkAlgorithm }}
 		>
-			<Temp />
+			<RouterTag />
 		</ConfigProvider>
 	);
 };

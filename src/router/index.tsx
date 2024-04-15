@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom';
 /**
  * @description根据给定的 HTTP 状态码获取相应的错误消息。
  */
-const generateMEnu = (source: ExtendedRouteObject[] | undefined, FPath: string): MenuProps['items'] => {
+const generateMenu = (source: ExtendedRouteObject[] | undefined, FPath: string): MenuProps['items'] => {
 	const arr: MenuProps['items'] = [];
 	if (Array.isArray(source) && source.length) {
 		source.forEach(({ path, title, children }) => {
@@ -14,7 +14,7 @@ const generateMEnu = (source: ExtendedRouteObject[] | undefined, FPath: string):
 				arr.push({
 					key: `${FPath}/${path}`,
 					label: title,
-					children: children && generateMEnu(children, `${FPath}/${path}`),
+					children: children && generateMenu(children, `${FPath}/${path}`),
 				});
 			}
 		});
@@ -24,8 +24,8 @@ const generateMEnu = (source: ExtendedRouteObject[] | undefined, FPath: string):
 export default function routesWithGuard(routConfig: ExtendedRouteObject[]): ExtendedRouteObject[] {
 	const isLogin = !!cacheUserInfo();
 	let menus = JSON.parse(localStorage.getItem('menus') || '[]');
-	if (isLogin && menus.length === 0) {
-		menus = generateMEnu(routConfig[0].children, '/home');
+	if ((isLogin && menus.length === 0) || (!routConfig[0].needAuth && menus.length === 0)) {
+		menus = generateMenu(routConfig[0].children, '/home');
 		localStorage.setItem('menus', JSON.stringify(menus));
 	}
 	return routConfig.map((item) => {

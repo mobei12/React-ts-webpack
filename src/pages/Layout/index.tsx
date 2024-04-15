@@ -27,7 +27,7 @@ const App: React.FC = () => {
 				{/* <Menu mode="horizontal" defaultSelectedKeys={['2']} items={items1} style={{ flex: 1, minWidth: 0 }}
 				 /> */}
 				<div className="right flex-1 text-right">
-					<Button onClick={() => loginOut()}>退出</Button>
+					{menus[0].needAuth && <Button onClick={() => loginOut()}>退出</Button>}
 					<ToggleTheme />
 				</div>
 			</Header>
