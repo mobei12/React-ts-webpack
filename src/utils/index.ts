@@ -1,4 +1,2 @@
-import Interaction from './interaction';
-import Tools from './tools';
-
-export { Interaction, Tools };
+export * from './interaction';
+export * from './tools';

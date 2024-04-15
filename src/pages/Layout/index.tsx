@@ -2,17 +2,16 @@ import React from 'react';
 import { Layout, Menu, theme, Button } from 'antd';
 import { Outlet } from 'react-router-dom';
 import ToggleTheme from 'src/component/ToggleThem';
-import { menusHooks } from 'src/hooks';
-import { Tools } from 'src/utils';
+import { getMenus } from 'src/hooks';
+import { removeToken } from 'src/utils';
 
 const { Header, Content, Sider } = Layout;
 const App: React.FC = () => {
 	const { token } = theme.useToken();
-	const { getMenus } = menusHooks;
 	const [menus, defaultKey, navigateTo] = getMenus();
 	const { colorBgContainer, borderRadiusLG } = token;
 	const loginOut = () => {
-		Tools.removeToken();
+		removeToken();
 		navigateTo('/user/login');
 	};
 	return (

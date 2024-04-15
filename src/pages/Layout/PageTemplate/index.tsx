@@ -1,11 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import './index.scss';
-import { userHook } from 'src/hooks';
-import { Interaction } from 'src/utils';
+import { getUserList } from 'src/hooks';
+import { EMessageType, showMessage } from 'src/utils';
 import { IUser } from 'src/hooks/userHook';
 
 const PageTemplate: FC = () => {
-	const { getUserList } = userHook;
 	const [dataList, setDataList] = useState<IUser[]>([]);
 	useEffect(() => {
 		const fetchData = async () => {
@@ -13,7 +12,7 @@ const PageTemplate: FC = () => {
 			if (code === 200) {
 				setDataList(data);
 			} else {
-				Interaction.showMessage(message, Interaction.EMessageType.warning);
+				showMessage(message, EMessageType.warning);
 			}
 		};
 		fetchData();

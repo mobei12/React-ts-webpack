@@ -1,5 +1,5 @@
 import { ExtendedRouteObject } from 'src/router/type';
-import { Tools } from 'src/utils';
+import { cacheUserInfo } from 'src/utils';
 import { MenuProps } from 'antd';
 import { Navigate } from 'react-router-dom';
 
@@ -22,14 +22,14 @@ const generateMEnu = (source: ExtendedRouteObject[] | undefined, FPath: string):
 	return arr;
 };
 export default function routesWithGuard(routConfig: ExtendedRouteObject[]): ExtendedRouteObject[] {
-	const isLogin = !!Tools.cacheUserInfo();
+	const isLogin = !!cacheUserInfo();
 	let menus = JSON.parse(localStorage.getItem('menus') || '[]');
 	if (isLogin && menus.length === 0) {
 		menus = generateMEnu(routConfig[0].children, '/home');
 		localStorage.setItem('menus', JSON.stringify(menus));
 	}
 	return routConfig.map((item) => {
-		if (!isLogin && item.path === '/home') {
+		if (!isLogin && item.needAuth && item.path === '/home') {
 			return {
 				...item,
 				element: <Navigate to="/user/login" />,

@@ -4,7 +4,7 @@ import { useRoutes } from 'react-router-dom';
 import routesWithGuard from 'src/router';
 import routConfig from 'src/router/routesConfig';
 import { ETheme, useTheme } from 'src/context/Theme';
-import { Tools } from 'src/utils';
+import { setTheme } from 'src/utils';
 import './App.scss';
 
 const Temp = () => {
@@ -14,7 +14,7 @@ const Temp = () => {
 const App = () => {
 	const { theme: currentTheme, toggleTheme } = useTheme();
 	useEffect(() => {
-		const localTheme = Tools.setTheme();
+		const localTheme = setTheme();
 		if (localTheme) {
 			toggleTheme(localTheme as ETheme);
 		}

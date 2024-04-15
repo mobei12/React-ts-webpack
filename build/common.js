@@ -8,7 +8,7 @@ function generateEnv(parsed) {
     const env = {};
     Object.keys(parsed).forEach(key => {
         const value = parsed[key];
-        if (value && value !== null) {
+        if (value) {
             env[`process.env.${key}`] = JSON.stringify(value);
         }
     });

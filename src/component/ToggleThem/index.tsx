@@ -1,6 +1,6 @@
 import { Select } from 'antd';
 import { useEffect, useState } from 'react';
-import { Tools } from 'src/utils';
+import { setTheme as setLocalTheme } from 'src/utils';
 import { TTheme } from 'src/utils/tools';
 import { ETheme, useTheme } from 'src/context/Theme';
 
@@ -17,7 +17,7 @@ const ToggleTheme = () => {
 		setTheme(defaultChecked);
 	}, []);
 	const handleChange = (value: string) => {
-		Tools.setTheme(value as TTheme);
+		setLocalTheme(value as TTheme);
 		setTheme(value);
 		toggleTheme(value as ETheme);
 	};

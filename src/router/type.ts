@@ -7,7 +7,7 @@ export interface FunctionalImportType {
 export type ReactElementType = JSX.Element;
 export type roleType = 'admin' | 'user'; // 角色
 export type ExtendedRouteObject = RouteObject & {
-	auth?: boolean;
+	needAuth?: boolean;
 	component?: FunctionalImportType; // import()懒加载方式引入的组件
 	children?: ExtendedRouteObject[];
 	element?: ReactElementType;

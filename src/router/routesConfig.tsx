@@ -18,6 +18,7 @@ const routConfig: ExtendedRouteObject[] = [
 	{
 		path: '/home',
 		element: <Home />,
+		needAuth: false,
 		children: [
 			{
 				path: 'Welcome',

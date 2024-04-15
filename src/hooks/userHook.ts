@@ -16,7 +16,7 @@ type userType = {
  * @param {{ username: string, password: string }} values - 包含用户名和密码的对象
  * @return {loginType} 登录尝试的结果
  */
-async function login(values: userType): Promise<loginType> {
+export async function login(values: userType): Promise<loginType> {
 	try {
 		const { data } = await api.post<loginType, userType>('/user/login', values);
 		return data;
@@ -39,7 +39,7 @@ type registerType = Omit<loginType, 'token'> & {
  * @param {userType} values - 要注册用户的数值
  * @return {Promise<any>} 注册API调用返回的数据，或带有代码和消息的对象
  */
-async function register(values: userType): Promise<registerType> {
+export async function register(values: userType): Promise<registerType> {
 	try {
 		const { data } = await api.post<registerType, userType>('/user/register', values);
 		return data;
@@ -62,7 +62,7 @@ export interface IUser {
 type UserListType = IUser[];
 type RUserListType = Promise<{ code: number; data: UserListType; message: string }>;
 
-async function getUserList(): Promise<RUserListType> {
+export async function getUserList(): Promise<RUserListType> {
 	try {
 		const { data } = await api.get<UserListType>('/user/getUserList');
 		return { code: 200, data, message: 'success' };
@@ -75,5 +75,3 @@ async function getUserList(): Promise<RUserListType> {
 		};
 	}
 }
-
-export default { login, register, getUserList };

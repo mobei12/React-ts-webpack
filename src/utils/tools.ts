@@ -5,7 +5,7 @@
  * @description 根据token 解析用户信息并保存
  * @return {boolean | null} 是否有登录权限
  */
-const cacheUserInfo = (): boolean | null => {
+export const cacheUserInfo = (): boolean | null => {
 	const token = localStorage.getItem('user_token');
 	if (token) {
 		localStorage.setItem('user', token);
@@ -17,7 +17,7 @@ const cacheUserInfo = (): boolean | null => {
 /**
  * @description 清除所有token
  */
-const removeToken = (): void => {
+export const removeToken = (): void => {
 	localStorage.removeItem('user');
 	localStorage.removeItem('user_token');
 	localStorage.removeItem('menus');
@@ -28,7 +28,7 @@ const removeToken = (): void => {
  * @param {number | null} code - HTTP 状态码。
  * @return {string} 与状态码对应的错误消息。
  */
-const getInfoWithCode = (code: number | null): string => {
+export const getInfoWithCode = (code: number | null): string => {
 	let messageInfo: string;
 	switch (code) {
 		case 400:
@@ -75,7 +75,7 @@ const getInfoWithCode = (code: number | null): string => {
 };
 export type TTheme = 'dark' | 'light' | 'system' | undefined;
 
-const setTheme = (isDark?: TTheme): string | null => {
+export const setTheme = (isDark?: TTheme): string | null => {
 	const rootElement: HTMLElement = document.documentElement as HTMLElement;
 	const localTheme = localStorage.getItem('theme');
 
@@ -106,13 +106,4 @@ const setTheme = (isDark?: TTheme): string | null => {
 		localStorage.setItem('theme', isDark);
 	}
 	return localStorage.getItem('theme');
-};
-
-// 调用示例
-export default {
-	cacheUserInfo,
-	removeToken,
-	getInfoWithCode,
-	setTheme,
-	TTheme: 'auto' as TTheme,
 };

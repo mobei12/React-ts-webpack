@@ -1,6 +1,6 @@
 import { NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 
-function getMenus() {
+export const getMenus = () => {
 	const navigate: NavigateFunction = useNavigate();
 	const { pathname: defaultKey } = useLocation();
 	const menus = JSON.parse(localStorage.getItem('menus') || '[]');
@@ -9,5 +9,13 @@ function getMenus() {
 	};
 	return [menus, defaultKey, navigateTo];
 }
-
-export default { getMenus };
+// no use
+export const filterMenus = (condition: (item: (item: never) => never) => boolean) => {
+	const navigate: NavigateFunction = useNavigate();
+	const { pathname: defaultKey } = useLocation();
+	const menus = JSON.parse(localStorage.getItem('menus') || '[]').map(condition((item: never) => item));
+	const navigateTo = (key: string) => {
+		navigate(key);
+	};
+	return [menus, defaultKey, navigateTo];
+};

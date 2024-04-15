@@ -2,12 +2,11 @@ import { FC, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
 import loadsh from 'lodash';
-import { userHook } from 'src/hooks/index';
-import { Interaction } from 'src/utils';
+import { login } from 'src/hooks';
+import { EMessageType, showMessage } from 'src/utils';
 
 const Login: FC = () => {
 	const navigate: NavigateFunction = useNavigate();
-	const { login } = userHook;
 	const [loadings, setLoadings] = useState<boolean>(false);
 	const getLogin = async (values: { username: string; password: string }) => {
 		setLoadings(true);
@@ -16,15 +15,15 @@ const Login: FC = () => {
 			if (token) {
 				localStorage.setItem('user_token', token);
 				localStorage.setItem('user', JSON.stringify({ name: values.username }));
-				Interaction.showMessage('登录成功', Interaction.EMessageType.success, 2, () => {
+				showMessage('登录成功', EMessageType.success, 2, () => {
 					navigate('/home');
 				});
 			} else {
-				Interaction.showMessage(message!, Interaction.EMessageType.warning);
+				showMessage(message!, EMessageType.warning);
 				setLoadings(false);
 			}
 		} else {
-			Interaction.showMessage(message!, Interaction.EMessageType.error);
+			showMessage(message!, EMessageType.error);
 			setLoadings(false);
 		}
 	};
@@ -50,7 +49,9 @@ const Login: FC = () => {
 				</Button>
 			</Form.Item>
 			<Form.Item wrapperCol={{ span: 24 }} style={{ textAlign: 'right' }}>
-				<Link className='dark:text-white' to="/user/register">注册</Link>
+				<Link className="dark:text-white" to="/user/register">
+					注册
+				</Link>
 			</Form.Item>
 		</Form>
 	);
