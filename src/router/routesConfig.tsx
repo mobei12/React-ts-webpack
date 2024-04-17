@@ -1,23 +1,13 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-import User from 'src/pages/User';
-import Login from 'src/pages/User/Login';
-import Register from 'src/pages/User/Register';
-
-import NotFind from 'src/pages/404';
-import Home from 'src/pages/Layout';
-import PageTemplate from 'src/pages/Layout/PageTemplate';
-import ToDoList from 'src/pages/Layout/ToDoList';
-import Welcome from 'src/pages/Layout/Welcome';
-import AuthorityManagement from 'src/pages/Layout/UserManagement/AuthorityManagement';
+import { AuthorityManagement, Home, Login, PageTemplate, Register, ToDoList, Welcome, NotFind, User } from './page';
 import { ExtendedRouteObject } from './type';
+import { elementSuspenseWrapper } from './Tool';
 
-/* ---HomeEnd---*/
 const routConfig: ExtendedRouteObject[] = [
 	{
 		path: '/home',
-		element: <Home />,
+		element: elementSuspenseWrapper(Home),
 		needAuth: false,
 		children: [
 			{
@@ -55,7 +45,7 @@ const routConfig: ExtendedRouteObject[] = [
 	},
 	{
 		path: '/user',
-		element: <User />,
+		element: elementSuspenseWrapper(User),
 		children: [
 			{
 				path: 'login',
@@ -73,7 +63,7 @@ const routConfig: ExtendedRouteObject[] = [
 	},
 	{
 		path: '*',
-		element: <NotFind />,
+		element: elementSuspenseWrapper(NotFind),
 	},
 ];
 export default routConfig;

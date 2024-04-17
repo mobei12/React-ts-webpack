@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout, Menu, theme, Button } from 'antd';
 import { Outlet } from 'react-router-dom';
 import ToggleTheme from 'src/component/ToggleThem';
@@ -6,7 +5,7 @@ import { getMenus } from 'src/hooks';
 import { removeToken } from 'src/utils';
 
 const { Header, Content, Sider } = Layout;
-const App: React.FC = () => {
+const App = () => {
 	const { token } = theme.useToken();
 	const [menus, defaultKey, navigateTo] = getMenus();
 	const { colorBgContainer, borderRadiusLG } = token;

@@ -1,7 +1,6 @@
-import { FC } from 'react';
 import { Link} from 'react-router-dom';
 
-const NoFoundPage: FC = () => {
+const NoFoundPage = () => {
 	return (
 		<div className="text-center    pt-20 space-y-10">
 			<h2 className="text-5xl">404</h2>

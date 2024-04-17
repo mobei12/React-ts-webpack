@@ -1,8 +1,7 @@
-import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import './index.scss';
 
-const User: FC = () => {
+const User = () => {
 	return (
 		<div className="user-main ">
 			<div className="user-container dark:bg-gray-700 bg-white ">
