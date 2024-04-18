@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import './index.scss';
 import { getUserList } from 'src/hooks';
 import { EMessageType, showMessage } from 'src/utils';
 import { IUser } from 'src/hooks/userHook';
 
-const PageTemplate = () => {
+const PageTemplate:FC = () => {
 	const [dataList, setDataList] = useState<IUser[]>([]);
 	useEffect(() => {
 		const fetchData = async () => {
