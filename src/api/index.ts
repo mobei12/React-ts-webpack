@@ -3,6 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosR
 import { getInfoWithCode, removeToken, showMessage, EMessageType } from 'src/utils';
 import GlobalLoading from 'src/component/Loading';
 
+type ThinAxiosRequestConfig = Omit<AxiosRequestConfig, 'url' | 'method' | 'data'>;
 // 导出Request，可以用来自定义传递配置来创建实例
 export class Request {
 	// axios 实例
@@ -33,7 +34,7 @@ export class Request {
 			},
 			(err: AxiosError): Promise<AxiosResponse> => {
 				// 请求错误，这里可以用全局提示框进行提示
-				this.showLoading(); // 请求发起前显示加载状态
+				this.hideLoading(); // 请求发起前显示加载状态
 				showMessage('请求错误', EMessageType.error);
 				return Promise.reject(err);
 			},
@@ -55,17 +56,17 @@ export class Request {
 				this.hideLoading(); // 请求错误时隐藏加载状态
 				// 这里用来处理http常见错误，进行全局提示
 				const status: number | null = err.response?.status || null;
-				const message: string = getInfoWithCode(status) || err.message;
-				if (status === 401) {
-					showMessage(message, 'error', 2, () => {
+				const message: string = err.message || getInfoWithCode(status);
+				showMessage(message, 'error', 2, () => {
+					if (status === 401) {
 						removeToken();
 						const dynamicPartRegex = /\/\/[^/]+\/(.*)/; // 匹配第一个斜杠后的所有部分
 						const dynamicPartMatch = window.location.href.match(dynamicPartRegex);
 						if (dynamicPartMatch && dynamicPartMatch[1]) {
 							window.location.href = window.location.href.replace(dynamicPartMatch[1], 'user/login'); // 执行页面导航操作
 						}
-					});
-				}
+					}
+				});
 				return Promise.reject(Object.assign(err, { message }));
 			},
 		);
@@ -87,24 +88,24 @@ export class Request {
 		}
 	};
 
-	public get<T = never>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+	public get<T = never>(url: string, config?: ThinAxiosRequestConfig): Promise<AxiosResponse<T>> {
 		return this.instance.get(url, config);
 	}
 
-	public post<T, D = unknown>(url: string, data?: D, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+	public post<T, D = unknown>(url: string, data?: D, config?: ThinAxiosRequestConfig): Promise<AxiosResponse<T>> {
 		return this.instance.post<T>(url, data, config);
 	}
 
-	public put<T = never>(url: string, data?: never, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+	public put<T = never>(url: string, data?: never, config?: ThinAxiosRequestConfig): Promise<AxiosResponse<T>> {
 		return this.instance.put(url, data, config);
 	}
 
-	public delete<T = never>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+	public delete<T = never>(url: string, config?: ThinAxiosRequestConfig): Promise<AxiosResponse<T>> {
 		return this.instance.delete(url, config);
 	}
 
 	// 可用用来发送其他请求，如patch
-	public request<T = never>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+	public request<T = never>(config: ThinAxiosRequestConfig): Promise<AxiosResponse<T>> {
 		return this.instance.request(config);
 	}
 }

@@ -11,17 +11,12 @@ const Register: FC = (): ReactElement => {
 	const getRegister = async (values: { username: string; password: string }) => {
 		setLoadings(true);
 		const { code, message, id } = await register(values);
-		if (code === 200) {
-			if (id) {
-				showMessage('注册成功', EMessageType.success);
-				navigate('/user/login');
-			} else {
-				showMessage(message!, EMessageType.warning);
-				setLoadings(false);
-			}
+		setLoadings(false);
+		if (code === 200 && id) {
+			showMessage('注册成功', EMessageType.success);
+			navigate('/user/login');
 		} else {
 			showMessage(message!, EMessageType.error);
-			setLoadings(false);
 		}
 	};
 	const onFinish = loadsh.debounce(getRegister, 1000);

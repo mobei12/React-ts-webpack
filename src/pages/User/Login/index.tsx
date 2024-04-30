@@ -11,20 +11,15 @@ const Login: FC = () => {
 	const getLogin = async (values: { username: string; password: string }) => {
 		setLoadings(true);
 		const { code, message, token } = await login(values);
-		if (code === 200) {
-			if (token) {
-				localStorage.setItem('user_token', token);
-				localStorage.setItem('user', JSON.stringify({ name: values.username }));
-				showMessage('登录成功', EMessageType.success, 2, () => {
-					navigate('/home');
-				});
-			} else {
-				showMessage(message!, EMessageType.warning);
-				setLoadings(false);
-			}
+		setLoadings(false);
+		if (code === 200 && token) {
+			localStorage.setItem('user_token', token);
+			localStorage.setItem('user', JSON.stringify({ name: values.username }));
+			showMessage('登录成功', EMessageType.success, 2, () => {
+				navigate('/home');
+			});
 		} else {
 			showMessage(message!, EMessageType.error);
-			setLoadings(false);
 		}
 	};
 	const onFinish = loadsh.debounce(getLogin, 1000);
