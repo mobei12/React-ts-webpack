@@ -23,6 +23,9 @@ const defConfig = merge(config, {
 		historyApiFallback: true,// history 模式
 		port,
 	},
+	watchOptions: {
+		ignored: /node_modules/,
+	},
 	plugins: [
 		new webpack.DefinePlugin(generateEnv(devEnv.parsed)),
 	],
