@@ -15,10 +15,7 @@ const App = () => {
 	const { theme: currentTheme, toggleTheme } = useTheme();
 	useEffect(() => {
 		const localTheme = setTheme();
-		if (localTheme)
-		
-		
-		{
+		if (localTheme) {
 			toggleTheme(localTheme as ETheme);
 		}
 	}, [toggleTheme]);
