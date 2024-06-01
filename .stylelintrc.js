@@ -1,5 +1,5 @@
 module.exports = {
-    rules: {
-      "block-no-empty": true
-    }
-  };
+  rules: {
+    "block-no-empty": true
+  }
+};
