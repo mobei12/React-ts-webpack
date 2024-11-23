@@ -21,8 +21,6 @@ const ToggleTheme = () => {
 		setTheme(value);
 		toggleTheme(value as ETheme);
 	};
-	return (
-		<Select onChange={handleChange} style={{ width: 160 }} value={`主题：${theme}`} options={options} />
-	);
+	return <Select onChange={handleChange} style={{ width: 160 }} value={`主题：${theme}`} options={options} />;
 };
 export default ToggleTheme;

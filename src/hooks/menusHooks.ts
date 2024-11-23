@@ -8,7 +8,7 @@ export const getMenus = () => {
 		navigate(key);
 	};
 	return [menus, defaultKey, navigateTo];
-}
+};
 // no use
 export const filterMenus = (condition: (item: (item: never) => never) => boolean) => {
 	const navigate: NavigateFunction = useNavigate();

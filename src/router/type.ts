@@ -13,4 +13,4 @@ export type ExtendedRouteObject = RouteObject & {
 	element?: ReactElementType;
 	role?: roleType[]; //
 	title?: string;
-}
+};

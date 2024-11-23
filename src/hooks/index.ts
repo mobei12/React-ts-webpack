@@ -1,3 +1,3 @@
-export * from './userHook'
-export * from './menusHooks'
-export * from './templateHook'
+export * from './userHook';
+export * from './menusHooks';
+export * from './templateHook';
