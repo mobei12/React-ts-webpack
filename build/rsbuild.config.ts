@@ -11,6 +11,9 @@ const envs = process.env.NODE_ENV === 'production' ? ['.env', '.env.prod'] : ['.
 const devEnv = dotenv.config({ path: envs, override: true });
 const projectRoot = process.cwd();
 export default defineConfig({
+	html:{
+		favicon: 'src/assets/img/AoYeh.svg',
+	},
 	source: {
 		entry: {
 			index: 'src/index.tsx',
