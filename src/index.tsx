@@ -5,6 +5,7 @@ import { ThemeProvider } from 'src/context/Theme';
 import App from './App';
 import './index.scss';
 
+console.log(process);
 document.title = process.env.CUSTOMIZE_APP_TITLE || 'My App - Development';
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
