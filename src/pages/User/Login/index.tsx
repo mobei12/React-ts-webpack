@@ -7,6 +7,7 @@ import { EMessageType, showMessage } from 'src/utils';
 
 const Login: FC = () => {
 	const navigate: NavigateFunction = useNavigate();
+	navigate;
 	const [loadings, setLoadings] = useState<boolean>(false);
 	const getLogin = async (values: { username: string; password: string }) => {
 		setLoadings(true);
@@ -28,7 +29,6 @@ const Login: FC = () => {
 			name="basic"
 			wrapperCol={{ span: 24 }}
 			style={{ maxWidth: 600, minHeight: '200px' }}
-			initialValues={{ remember: true }}
 			onFinish={onFinish}
 			autoComplete="off"
 		>
