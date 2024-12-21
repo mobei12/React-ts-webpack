@@ -15,6 +15,8 @@
     +--- webpack.dev.js        开发环境配置
     +--- webpack.dll.conf.js   dll生成配置，用于生成dll
     +--- webpack.base.js       基础配置  
+    +--- common                公共配置
+    +--- rsbuild.config.js     rebuild 打包配置
 +--- package.json            依赖说明文件
 +--- public                  基础配置文件
 +---build webpack相关配置
